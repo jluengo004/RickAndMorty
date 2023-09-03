@@ -15,9 +15,23 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ABN-90-yrc">
+                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                            </stackView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ABN-90-yrc" secondAttribute="trailing" id="J0B-xX-QFq"/>
+                            <constraint firstItem="ABN-90-yrc" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="M0l-Ez-ghd"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="ABN-90-yrc" secondAttribute="bottom" id="Rnf-Rv-t0U"/>
+                            <constraint firstItem="ABN-90-yrc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="tRl-9v-wXE"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="stackView" destination="ABN-90-yrc" id="gLd-Wg-d1h"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

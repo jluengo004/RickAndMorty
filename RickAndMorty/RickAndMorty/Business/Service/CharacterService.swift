@@ -83,21 +83,18 @@ public class CharacterService {
             completion(RMResult.failure("url error"))
             return
         }
-        networkManager.httpGet(url: url) { result in
-            switch result {
-            case .success(let charactersData):
-                if let characters = try? JSONDecoder().decode(CharacterPagination.self, from: charactersData) {
-                    let charactersResult = RMResult<CharacterPagination, String>.success(characters)
-                    completion(charactersResult)
-                } else {
-                    let codingError = RMResult<CharacterPagination, String>.failure("coding error")
-                    completion(codingError)
-                }
-                
-            case .failure(let error):
-                let codingError = RMResult<CharacterPagination, String>.failure(error)
-                completion(codingError)
-            }
+        startCharacterPaginationNetworkCall(url: url) { result in
+            completion(result)
+        }
+    }
+    
+    public func getCharacterPage(page: Int, completion: @escaping (RMResult<CharacterPagination, String>) -> Void) {
+        guard let url = URL(string: baseURL + "/?page=\(page)") else {
+            completion(RMResult.failure("url error"))
+            return
+        }
+        startCharacterPaginationNetworkCall(url: url) { result in
+            completion(result)
         }
     }
     
@@ -108,7 +105,7 @@ public class CharacterService {
             completion(RMResult.failure("param error"))
             return
         }
-        startNetworkCall(url: url) { result in
+        startCharactersNetworkCall(url: url) { result in
             completion(result)
         }
     }
@@ -118,13 +115,13 @@ public class CharacterService {
             completion(RMResult.failure("url error"))
             return
         }
-        startNetworkCall(url: url) { result in
+        startCharactersNetworkCall(url: url) { result in
             completion(result)
         }
     }
     
     
-    private func startNetworkCall(url: URL, completion: @escaping (RMResult<[Character], String>) -> Void) {
+    private func startCharactersNetworkCall(url: URL, completion: @escaping (RMResult<[Character], String>) -> Void) {
         networkManager.httpGet(url: url) { result in
             switch result {
             case .success(let charactersData):
@@ -138,6 +135,25 @@ public class CharacterService {
                 
             case .failure(let error):
                 let codingError = RMResult<[Character], String>.failure(error)
+                completion(codingError)
+            }
+        }
+    }
+    
+    private func startCharacterPaginationNetworkCall(url: URL, completion: @escaping (RMResult<CharacterPagination, String>) -> Void) {
+        networkManager.httpGet(url: url) { result in
+            switch result {
+            case .success(let charactersData):
+                if let characters = try? JSONDecoder().decode(CharacterPagination.self, from: charactersData) {
+                    let charactersResult = RMResult<CharacterPagination, String>.success(characters)
+                    completion(charactersResult)
+                } else {
+                    let codingError = RMResult<CharacterPagination, String>.failure("coding error")
+                    completion(codingError)
+                }
+                
+            case .failure(let error):
+                let codingError = RMResult<CharacterPagination, String>.failure(error)
                 completion(codingError)
             }
         }
