@@ -16,6 +16,7 @@ class CharacterCollecionViewCell: UICollectionViewCell {
     static let identifier = "CharacterCollecionViewCell"
     weak var delegate: CharacterCollecionViewCellDelegate?
     private var character: Character?
+    let imageCache = NSCache<AnyObject, AnyObject>()
     
     @IBOutlet private weak var imageView: UIImageView!
     @IBOutlet private weak var nameLabel: UILabel!
@@ -40,7 +41,7 @@ class CharacterCollecionViewCell: UICollectionViewCell {
         var underlineAttributedString = NSAttributedString(string: "", attributes: underlineAttribute)
         
         if let imageURL = character.image {
-            downloadImage(from:imageURL)
+            getImage(from:imageURL)
         }
         
         self.nameLabel.font = UIFont.boldSystemFont(ofSize: 20.0)
@@ -63,12 +64,27 @@ class CharacterCollecionViewCell: UICollectionViewCell {
         self.episodesLabel.attributedText = underlineAttributedString
     }
     
+    func getImage(from url: URL) {
+        if let imageFromCache = imageCache.object(forKey: url as AnyObject) as? UIImage {
+            setImage(image: imageFromCache)
+        } else {
+            downloadImage(from: url)
+        }
+    }
+    
     func downloadImage(from url: URL) {
-        getData(from: url) { data, response, error in
-            guard let data = data, error == nil else { return }
-            DispatchQueue.main.async() { [weak self] in
-                self?.imageView.image = UIImage(data: data)
+        getData(from: url) { imageData, response, error in
+            guard let imageData = imageData, error == nil else { return }
+            if let image = UIImage(data: imageData) {
+                self.imageCache.setObject(image, forKey: url as AnyObject)
+                self.setImage(image: image)
             }
+        }
+    }
+    
+    func setImage(image: UIImage) {
+        DispatchQueue.main.async() { [weak self] in
+            self?.imageView.image = image
         }
     }
     
