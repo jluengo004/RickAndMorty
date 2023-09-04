@@ -41,11 +41,11 @@ class CharacterCollecionViewCell: UICollectionViewCell {
         if let species = character.species {
             self.speciesLabel.text = "Specie: \(species)"
         }
-        if let origin = character.origin {
-            self.originLabel.text = "Origin: \(origin)"
+        if let originName = character.origin?.name {
+            self.originLabel.text = "Origin: \(originName)"
         }
-        if let location = character.location {
-            self.locationLabel.text = "Actual Location: \(location)"
+        if let locationName = character.location?.name {
+            self.locationLabel.text = "Actual Location: \(locationName)"
         }
         self.episodesLabel.text = "Appeared in \(character.episode.count) episodes"
     }
