@@ -19,12 +19,11 @@ class CharacterCollecionViewCell: UICollectionViewCell {
     
     @IBOutlet private weak var imageView: UIImageView!
     @IBOutlet private weak var nameLabel: UILabel!
+    @IBOutlet private weak var stackView: UIStackView!
     @IBOutlet private weak var statusLabel: UILabel!
     @IBOutlet private weak var speciesLabel: UILabel!
-    @IBOutlet private weak var originLabel: UILabel!
-    @IBOutlet private weak var locationLabel: UILabel!
+    @IBOutlet private weak var genderLabel: UILabel!
     @IBOutlet private weak var episodesLabel: UILabel!
-    @IBOutlet private weak var mainButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -33,27 +32,54 @@ class CharacterCollecionViewCell: UICollectionViewCell {
     func configureView(character: Character) {
         self.character = character
         self.contentView.layer.cornerRadius = 10
+        self.stackView.layer.cornerRadius = 10
+        self.imageView.layer.cornerRadius = 10
+        self.nameLabel.layer.cornerRadius = 10
         
-        self.nameLabel.text = "Name: \(character.name)"
+        let underlineAttribute = [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue]
+        var underlineAttributedString = NSAttributedString(string: "", attributes: underlineAttribute)
+        
+        if let imageURL = character.image {
+            downloadImage(from:imageURL)
+        }
+        
+        self.nameLabel.font = UIFont.boldSystemFont(ofSize: 20.0)
+        self.nameLabel.text = character.name
         if let status = character.status {
-            self.statusLabel.text = "Status: \(status)"
+            underlineAttributedString = NSAttributedString(string: "Status: \(status)", attributes: underlineAttribute)
+            self.statusLabel.attributedText = underlineAttributedString
         }
         if let species = character.species {
-            self.speciesLabel.text = "Specie: \(species)"
+            underlineAttributedString = NSAttributedString(string: "Specie: \(species)", attributes: underlineAttribute)
+            self.speciesLabel.attributedText = underlineAttributedString
         }
-        if let originName = character.origin?.name {
-            self.originLabel.text = "Origin: \(originName)"
+        if let gender = character.gender {
+            underlineAttributedString = NSAttributedString(string: "Gender: \(gender)", attributes: underlineAttribute)
+            self.genderLabel.attributedText = underlineAttributedString
         }
-        if let locationName = character.location?.name {
-            self.locationLabel.text = "Actual Location: \(locationName)"
-        }
-        self.episodesLabel.text = "Appeared in \(character.episode.count) episodes"
+        let episodeCount = character.episode.count
+        let episodesString = episodeCount > 1 ? "episodes" : "episode"
+        underlineAttributedString = NSAttributedString(string: "Appeared in \(episodeCount) \(episodesString)", attributes: underlineAttribute)
+        self.episodesLabel.attributedText = underlineAttributedString
     }
     
-    @IBAction func mainButtonTapped(_ sender: UIButton) {
-        if let character = self.character {
-            self.delegate?.characterSelected(character: character)
+    func downloadImage(from url: URL) {
+        getData(from: url) { data, response, error in
+            guard let data = data, error == nil else { return }
+            DispatchQueue.main.async() { [weak self] in
+                self?.imageView.image = UIImage(data: data)
+            }
         }
     }
+    
+    func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
+        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
+    }
+    
+    /*
+     if let character = self.character {
+         self.delegate?.characterSelected(character: character)
+     }
+     */
     
 }
