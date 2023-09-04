@@ -16,7 +16,7 @@ public struct Character: Decodable {
     var gender: String?
     var origin: NameWithURL?
     var location: NameWithURL?
-    var image: String?
+    var image: URL?
     var episode: [URL]
     var url: URL?
     var created: String?
@@ -46,7 +46,7 @@ public struct Character: Decodable {
         self.gender = try container.decode(String?.self, forKey: .gender)
         self.origin = try container.decode(NameWithURL?.self, forKey: .origin)
         self.location = try container.decode(NameWithURL?.self, forKey: .location)
-        self.image = try container.decode(String?.self, forKey: .image)
+        self.image = try container.decode(URL?.self, forKey: .image)
         self.episode = try container.decode([URL].self, forKey: .episode)
         self.url = try container.decode(URL?.self, forKey: .url)
         self.created = try container.decode(String?.self, forKey: .created)

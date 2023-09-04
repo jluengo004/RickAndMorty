@@ -8,7 +8,7 @@
 import UIKit
 
 protocol CharactersCollectionViewProtocol: AnyObject {
-    func loadCharacters(characters: [Character])
+    func loadCharactersCollection(characters: [Character])
 }
 
 class CharactersCollectionViewController: UIViewController {
@@ -38,7 +38,7 @@ class CharactersCollectionViewController: UIViewController {
 }
 
 extension CharactersCollectionViewController: CharactersCollectionViewProtocol {
-    func loadCharacters(characters: [Character]) {
+    func loadCharactersCollection(characters: [Character]) {
         DispatchQueue.main.async {
             self.charactersViews?.reloadWith(characters: characters)
         }
@@ -48,6 +48,10 @@ extension CharactersCollectionViewController: CharactersCollectionViewProtocol {
 extension CharactersCollectionViewController: CharactersCollectionViewDelegate {
     func characterSelected(character: Character) {
         print(character)
+    }
+    
+    func loadNextPage() {
+        self.presenter.loadCharacters()
     }
     
 }

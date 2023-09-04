@@ -10,11 +10,13 @@ import UIKit
 
 protocol CharactersCollectionViewDelegate: AnyObject {
     func characterSelected(character: Character)
+    func loadNextPage()
 }
 
 class CharactersCollectionView: UIView  {
     private var characters: [Character] = []
     weak var delegate: CharactersCollectionViewDelegate?
+    private var isPageRefreshing: Bool = false
     
     @IBOutlet private weak var charactersCollectionView: UICollectionView!
     
@@ -26,12 +28,14 @@ class CharactersCollectionView: UIView  {
         let nib = UINib(nibName: "CharacterCollecionViewCell", bundle: nil)
         charactersCollectionView.register(nib, forCellWithReuseIdentifier: CharacterCollecionViewCell.identifier)
         charactersCollectionView.dataSource = self
+        charactersCollectionView.prefetchDataSource = self
         charactersCollectionView.delegate = self
     }
     
     func reloadWith(characters: [Character]) {
         self.characters = characters
         self.charactersCollectionView.reloadData()
+        isPageRefreshing = false
     }
 }
 
@@ -44,7 +48,7 @@ extension CharactersCollectionView: UICollectionViewDelegate, UICollectionViewDa
         return characters.count
     }
     
-    internal func collectionView(_ collectionView: UICollectionView,cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    internal func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CharacterCollecionViewCell.identifier,
                                                             for: indexPath) as? CharacterCollecionViewCell
         else { return UICollectionViewCell() }
@@ -60,10 +64,24 @@ extension CharactersCollectionView: UICollectionViewDelegate, UICollectionViewDa
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 3, left: 16, bottom: 3, right: 16)
-    }
+     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+         return UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+     }
+    
+}
 
+
+extension CharactersCollectionView: UICollectionViewDataSourcePrefetching {
+    
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        if indexPaths.last?.row ?? 0 > characters.count - 4 {
+            if !isPageRefreshing {
+                isPageRefreshing = true
+                delegate?.loadNextPage()
+            }
+        }
+    }
+    
 }
 
 extension CharactersCollectionView: CharacterCollecionViewCellDelegate {

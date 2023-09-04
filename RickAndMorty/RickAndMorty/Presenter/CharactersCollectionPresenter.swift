@@ -8,7 +8,7 @@
 import Foundation
 
 class CharactersCollectionPresenter {
-    private var characterCount = 1
+    private var characterPageCount = 1
     private var characters: [Character] = []
     weak var charactersCollectionVCProtocol: CharactersCollectionViewProtocol?
     
@@ -18,11 +18,12 @@ class CharactersCollectionPresenter {
     
     func loadCharacters() {
         let service = CharacterService()
-        service.getCharacterPage(page: characterCount) { result in
+        service.getCharacterPage(page: characterPageCount) { result in
             switch result {
             case .success(let charactersPagination):
                 self.characters.append(contentsOf: charactersPagination.results)
-                self.charactersCollectionVCProtocol?.loadCharacters(characters: self.characters)
+                self.charactersCollectionVCProtocol?.loadCharactersCollection(characters: self.characters)
+                self.characterPageCount += 1
                 
             case .failure(let error):
                 print(error)

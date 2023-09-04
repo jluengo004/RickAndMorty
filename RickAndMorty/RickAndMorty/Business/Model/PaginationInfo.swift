@@ -11,7 +11,7 @@ public struct PaginationInfo: Decodable {
     var count: Int
     var pages: Int
     var next: URL
-    var prev: Int?
+    var prev: URL?
 
     enum CodingKeys: String, CodingKey {
         case count
@@ -25,6 +25,6 @@ public struct PaginationInfo: Decodable {
         self.count = try container.decode(Int.self, forKey: .count)
         self.pages = try container.decode(Int.self, forKey: .pages)
         self.next = try container.decode(URL.self, forKey: .next)
-        self.prev = try container.decode(Int?.self, forKey: .prev)
+        self.prev = try container.decode(URL?.self, forKey: .prev)
     }
 }
