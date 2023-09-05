@@ -61,7 +61,7 @@ class CharactersCollectionViewController: UIViewController {
     
     func modifyFilterView() {
         DispatchQueue.main.async {
-            self.filterLabel.text = self.filters?.getLabelFilterParams()
+            self.filterLabel.attributedText = self.filters?.getLabelFilterParams()
             let originIndexPath = IndexPath(row: 0, section: 0)
             self.charactersViews?.charactersCollectionView.scrollToItem(at: originIndexPath, at: .top, animated: false)
             self.filterView.isHidden = false
