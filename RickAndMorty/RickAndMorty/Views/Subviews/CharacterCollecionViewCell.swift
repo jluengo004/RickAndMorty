@@ -8,13 +8,8 @@
 import Foundation
 import UIKit
 
-protocol CharacterCollecionViewCellDelegate: AnyObject {
-    func characterSelected(character: Character)
-}
-
 class CharacterCollecionViewCell: UICollectionViewCell {
     static let identifier = "CharacterCollecionViewCell"
-    weak var delegate: CharacterCollecionViewCellDelegate?
     private var character: Character?
     let imageCache = NSCache<AnyObject, AnyObject>()
     
@@ -91,11 +86,4 @@ class CharacterCollecionViewCell: UICollectionViewCell {
     func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
         URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
     }
-    
-    /*
-     if let character = self.character {
-         self.delegate?.characterSelected(character: character)
-     }
-     */
-    
 }

@@ -9,14 +9,13 @@ import Foundation
 import UIKit
 
 protocol CharactersCollectionViewDelegate: AnyObject {
-    func characterSelected(character: Character)
     func loadNextPage()
 }
 
 class CharactersCollectionView: UIView  {
     private var characters: [Character] = []
-    weak var delegate: CharactersCollectionViewDelegate?
     private var isPageRefreshing: Bool = false
+    weak var delegate: CharactersCollectionViewDelegate?
     
     @IBOutlet private weak var charactersCollectionView: UICollectionView!
     
@@ -59,20 +58,13 @@ extension CharactersCollectionView: UICollectionViewDelegate, UICollectionViewDa
         cell.layer.shadowRadius = 5
         cell.layer.masksToBounds = false
         cell.configureView(character: characters[indexPath.row])
-        cell.delegate = self
         
         return cell
     }
-    
-     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-         return UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
-     }
-    
 }
 
 
 extension CharactersCollectionView: UICollectionViewDataSourcePrefetching {
-    
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         if indexPaths.last?.row ?? 0 > characters.count - 4 {
             if !isPageRefreshing {
@@ -83,10 +75,3 @@ extension CharactersCollectionView: UICollectionViewDataSourcePrefetching {
     }
     
 }
-
-extension CharactersCollectionView: CharacterCollecionViewCellDelegate {
-    func characterSelected(character: Character) {
-        delegate?.characterSelected(character: character)
-    }
-}
-

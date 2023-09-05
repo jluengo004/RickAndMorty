@@ -21,35 +21,34 @@ public enum CharacterGender: String {
 }
 
 public class CharacterServiceParamsModel {
-    let ids: [String]?
-    let name: String?
-    let status: CharacterStatus?
-    let species: String?
-    let type: String?
-    let gender: CharacterGender?
+    var ids: [String]?
+    var name: String?
+    var status: CharacterStatus?
+    var species: String?
+    var type: String?
+    var gender: CharacterGender?
     
-    init(ids: [String]?, name: String?, status: CharacterStatus?, species: String?, type: String?, gender: CharacterGender?) {
+    public init(ids: [String]?, name: String?, status: CharacterStatus?, species: String?, type: String?, gender: CharacterGender?) {
         self.ids = ids
         self.name = name
         self.status = status
         self.species = species
         self.type = type
         self.gender = gender
-        
     }
     
     func getFilterParams() -> [URLQueryItem] {
         var queryParams: [URLQueryItem] = []
-        if let name = name {
+        if let name = name, !name.isEmpty {
             queryParams.append(URLQueryItem(name: "name", value: name))
         }
         if let status = status {
             queryParams.append(URLQueryItem(name: "status", value: status.rawValue))
         }
-        if let species = species {
+        if let species = species, !species.isEmpty {
             queryParams.append(URLQueryItem(name: "species", value: species))
         }
-        if let type = type {
+        if let type = type, !type.isEmpty {
             queryParams.append(URLQueryItem(name: "type", value: type))
         }
         if let gender = gender {
@@ -75,7 +74,7 @@ public class CharacterServiceParamsModel {
 
 public class CharacterService {
     
-    private let baseURL = "https://rickandmortyapi.com/api/character"
+    private let baseURL = "https://rickandmortyapi.com/api/character/"
     private let networkManager = NetworkManager()
     
     public func getAllCharacters(completion: @escaping (RMResult<CharacterPagination, String>) -> Void) {
@@ -89,7 +88,7 @@ public class CharacterService {
     }
     
     public func getCharacterPage(page: Int, completion: @escaping (RMResult<CharacterPagination, String>) -> Void) {
-        guard let url = URL(string: baseURL + "/?page=\(page)") else {
+        guard let url = URL(string: baseURL + "?page=\(page)") else {
             completion(RMResult.failure("url error"))
             return
         }
@@ -98,14 +97,14 @@ public class CharacterService {
         }
     }
     
-    public func getFilteredCharacters(params: CharacterServiceParamsModel, completion: @escaping (RMResult<[Character], String>) -> Void) {
+    public func getFilteredCharacters(params: CharacterServiceParamsModel, completion: @escaping (RMResult<CharacterPagination, String>) -> Void) {
         var urlComps = URLComponents(string: baseURL)
         urlComps?.queryItems = params.getFilterParams()
         guard let url = urlComps?.url else {
             completion(RMResult.failure("param error"))
             return
         }
-        startCharactersNetworkCall(url: url) { result in
+        startCharacterPaginationNetworkCall(url: url) { result in
             completion(result)
         }
     }
