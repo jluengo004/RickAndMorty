@@ -16,7 +16,7 @@ protocol CharactersCollectionViewDelegate: AnyObject {
 class CharactersCollectionView: UIView  {
     private var characters: [Character] = []
     private var isPageRefreshing: Bool = false
-    private var selectedIndexPath: IndexPath?
+    public var selectedIndexPath: IndexPath?
     weak var delegate: CharactersCollectionViewDelegate?
     
     @IBOutlet weak var charactersCollectionView: UICollectionView!

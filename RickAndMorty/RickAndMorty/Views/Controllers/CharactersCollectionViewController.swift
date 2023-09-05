@@ -70,6 +70,7 @@ class CharactersCollectionViewController: UIViewController {
     
     @IBAction func dismissFiltersTapped(_ sender: Any) {
         self.setInitifialFilters()
+        self.charactersViews?.selectedIndexPath = nil
         DispatchQueue.main.async {
             if let unfilteredCharacters = self.unfilteredCharacters {
                 self.charactersViews?.reloadWith(characters: unfilteredCharacters)
@@ -145,6 +146,7 @@ extension CharactersCollectionViewController: CharactersCollectionViewDelegate {
 
 extension CharactersCollectionViewController: CharacterFilterBackdropDelegate {
     func searchCharacters(filters: CharacterFilterParams) {
+        self.charactersViews?.selectedIndexPath = nil
         self.presenter.resetFilters(filters: filters)
         self.presenter.loadFilterCharacters()
         self.characterFilterBackdrop?.removeFromSuperview()
