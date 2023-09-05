@@ -17,7 +17,7 @@ class CharactersCollectionView: UIView  {
     private var isPageRefreshing: Bool = false
     weak var delegate: CharactersCollectionViewDelegate?
     
-    @IBOutlet private weak var charactersCollectionView: UICollectionView!
+    @IBOutlet weak var charactersCollectionView: UICollectionView!
     
     func initialize() {
         registerCells()

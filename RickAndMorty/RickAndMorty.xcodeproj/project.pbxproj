@@ -51,6 +51,8 @@
 		4DE0A5E52AA4F3DF0067317F /* CharacterCollecionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE0A5E42AA4F3DF0067317F /* CharacterCollecionViewCell.swift */; };
 		4DFCDE842AA64DA700EC588A /* FilterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFCDE832AA64DA700EC588A /* FilterButton.swift */; };
 		4DFCDE852AA64DA700EC588A /* FilterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFCDE832AA64DA700EC588A /* FilterButton.swift */; };
+		4DFCDE872AA72E1100EC588A /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFCDE862AA72E1000EC588A /* UIViewControllerExtension.swift */; };
+		4DFCDE882AA72E1100EC588A /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFCDE862AA72E1000EC588A /* UIViewControllerExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +104,7 @@
 		4DE0A5E22AA4F3D70067317F /* CharacterCollecionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CharacterCollecionViewCell.xib; sourceTree = "<group>"; };
 		4DE0A5E42AA4F3DF0067317F /* CharacterCollecionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterCollecionViewCell.swift; sourceTree = "<group>"; };
 		4DFCDE832AA64DA700EC588A /* FilterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterButton.swift; sourceTree = "<group>"; };
+		4DFCDE862AA72E1000EC588A /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -258,6 +261,7 @@
 			isa = PBXGroup;
 			children = (
 				4DFCDE832AA64DA700EC588A /* FilterButton.swift */,
+				4DFCDE862AA72E1000EC588A /* UIViewControllerExtension.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -402,6 +406,7 @@
 			files = (
 				4DE0A5CF2AA4E17C0067317F /* CharactersCollectionViewController.swift in Sources */,
 				4DCBAE332AA5F5A8004A0F69 /* CharacterFilterBackdrop.swift in Sources */,
+				4DFCDE872AA72E1100EC588A /* UIViewControllerExtension.swift in Sources */,
 				4DE0A5B62AA49D250067317F /* NetworkManager.swift in Sources */,
 				4DE0A5BB2AA49F810067317F /* CharacterModel.swift in Sources */,
 				4DE0A57F2AA49B4D0067317F /* AppDelegate.swift in Sources */,
@@ -428,6 +433,7 @@
 				4DE0A5BC2AA49F810067317F /* CharacterModel.swift in Sources */,
 				4DE0A5D62AA4E8470067317F /* PaginationInfo.swift in Sources */,
 				4DE0A5B72AA49D250067317F /* NetworkManager.swift in Sources */,
+				4DFCDE882AA72E1100EC588A /* UIViewControllerExtension.swift in Sources */,
 				4DE0A5C72AA4AFDA0067317F /* CharacterService.swift in Sources */,
 				4DE0A5D02AA4E17C0067317F /* CharactersCollectionViewController.swift in Sources */,
 				4DCBAE2E2AA4FB2A004A0F69 /* CharactersCollectionView.swift in Sources */,

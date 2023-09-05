@@ -12,7 +12,7 @@ class CharactersCollectionPresenter {
     private var filteredCharacterPageCount = 1
     private var characters: [Character] = []
     private var filteredCharacters: [Character] = []
-    private var filters: CharacterServiceParamsModel?
+    private var filters: CharacterFilterParams?
     weak var charactersCollectionVCProtocol: CharactersCollectionViewProtocol?
     
     func setCharacterViewProtocol(viewProtocol: CharactersCollectionViewProtocol) {
@@ -25,7 +25,7 @@ class CharactersCollectionPresenter {
             switch result {
             case .success(let charactersPagination):
                 self.characters.append(contentsOf: charactersPagination.results)
-                self.charactersCollectionVCProtocol?.loadCharactersCollection(characters: self.characters, isFiltered: false)
+                self.charactersCollectionVCProtocol?.loadCharactersCollection(characters: self.characters, filters: nil)
                 self.characterPageCount += 1
                 
             case .failure(let error):
@@ -41,16 +41,16 @@ class CharactersCollectionPresenter {
             switch result {
             case .success(let filteredCharactersPagination):
                 self.filteredCharacters.append(contentsOf: filteredCharactersPagination.results)
-                self.charactersCollectionVCProtocol?.loadCharactersCollection(characters: self.filteredCharacters, isFiltered: true)
+                self.charactersCollectionVCProtocol?.loadCharactersCollection(characters: self.filteredCharacters, filters: filters)
                 self.filteredCharacterPageCount += 1
                 
-            case .failure(let error):
-                print(error)
+            case .failure(_):
+                self.charactersCollectionVCProtocol?.emptyFilterCharacters()
             }
         }
     }
     
-    func resetFilters(filters: CharacterServiceParamsModel?) {
+    func resetFilters(filters: CharacterFilterParams?) {
         self.filters = filters
         self.filteredCharacterPageCount = 1
         self.filteredCharacters.removeAll()

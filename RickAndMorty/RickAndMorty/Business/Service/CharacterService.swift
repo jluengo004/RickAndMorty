@@ -20,7 +20,7 @@ public enum CharacterGender: String {
     case unknown = "unkonwn"
 }
 
-public class CharacterServiceParamsModel {
+public class CharacterFilterParams {
     var ids: [String]?
     var name: String?
     var status: CharacterStatus?
@@ -37,7 +37,7 @@ public class CharacterServiceParamsModel {
         self.gender = gender
     }
     
-    func getFilterParams() -> [URLQueryItem] {
+    func getQueryFilterParams() -> [URLQueryItem] {
         var queryParams: [URLQueryItem] = []
         if let name = name, !name.isEmpty {
             queryParams.append(URLQueryItem(name: "name", value: name))
@@ -56,6 +56,27 @@ public class CharacterServiceParamsModel {
         }
         
         return queryParams
+    }
+    
+    func getLabelFilterParams() -> String {
+        var filterString = ""
+        if let name = name, !name.isEmpty {
+            filterString += "Name: \(name)  "
+        }
+        if let status = status {
+            filterString += "Status: \(status.rawValue)  "
+        }
+        if let species = species, !species.isEmpty {
+            filterString += "Species: \(species)  "
+        }
+        if let type = type, !type.isEmpty {
+            filterString += "Type: \(type)  "
+        }
+        if let gender = gender {
+            filterString += "Gender: \(gender.rawValue)  "
+        }
+        
+        return filterString
     }
     
     func getCharactersIDParams() -> String {
@@ -97,9 +118,9 @@ public class CharacterService {
         }
     }
     
-    public func getFilteredCharacters(params: CharacterServiceParamsModel, completion: @escaping (RMResult<CharacterPagination, String>) -> Void) {
+    public func getFilteredCharacters(params: CharacterFilterParams, completion: @escaping (RMResult<CharacterPagination, String>) -> Void) {
         var urlComps = URLComponents(string: baseURL)
-        urlComps?.queryItems = params.getFilterParams()
+        urlComps?.queryItems = params.getQueryFilterParams()
         guard let url = urlComps?.url else {
             completion(RMResult.failure("param error"))
             return
@@ -109,7 +130,7 @@ public class CharacterService {
         }
     }
     
-    public func getCharactersByID(params: CharacterServiceParamsModel, completion: @escaping (RMResult<[Character], String>) -> Void) {
+    public func getCharactersByID(params: CharacterFilterParams, completion: @escaping (RMResult<[Character], String>) -> Void) {
         guard let url = URL(string: baseURL + params.getCharactersIDParams()) else {
             completion(RMResult.failure("url error"))
             return

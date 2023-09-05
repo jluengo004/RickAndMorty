@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 public protocol CharacterFilterBackdropDelegate {
-    func searchCharacters(filters: CharacterServiceParamsModel)
+    func searchCharacters(filters: CharacterFilterParams)
     func dismissView()
 }
 
@@ -116,11 +116,11 @@ public class CharacterFilterBackdrop: UIView {
     }
     
     @objc private func searchButtonTapped(_ sender: Any) {
-        let filterParams = CharacterServiceParamsModel(ids: nil,
+        let filterParams = CharacterFilterParams(ids: nil,
                                                        name: self.containerView.nameTextField.text,
                                                        status: self.selectedStatusButton?.status,
-                                                       species:  self.containerView.speciesTextField.text,
-                                                       type:  self.containerView.typeTextField.text,
+                                                       species: self.containerView.speciesTextField.text,
+                                                       type: self.containerView.typeTextField.text,
                                                        gender: self.selectedGenderButton?.gender)
         
         delegate?.searchCharacters(filters: filterParams)
@@ -130,11 +130,53 @@ public class CharacterFilterBackdrop: UIView {
         delegate?.dismissView()
     }
     
-    public func addCharacterFilterBackdrop(viewMain: UIView, delegate: CharacterFilterBackdropDelegate?){
+    public func addCharacterFilterBackdrop(viewMain: UIView, filters: CharacterFilterParams?, delegate: CharacterFilterBackdropDelegate?){
         let characterFilterBackdrop = getCharacterFilterBackdropOverlay()
         characterFilterBackdrop.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         characterFilterBackdrop.frame = viewMain.bounds
         self.delegate = delegate
+        configureButtonActions()
+        configureFilters(filters: filters)
+        viewMain.addSubview(characterFilterBackdrop)
+    }
+    
+    fileprivate func configureFilters(filters: CharacterFilterParams?) {
+        guard let filters = filters else { return }
+        if let name = filters.name, !name.isEmpty {
+            self.containerView.nameTextField.text = name
+        }
+        if let status = filters.status {
+            switch status {
+            case .alive:
+                statusButtonTapped(containerView.aliveButton)
+            case .dead:
+                statusButtonTapped(containerView.deadButton)
+            case .unknown:
+                statusButtonTapped(containerView.unknownStatusButton)
+            }
+        }
+        if let species = filters.species, !species.isEmpty {
+            self.containerView.speciesTextField.text = species
+        }
+        if let type = filters.type, !type.isEmpty {
+            self.containerView.typeTextField.text = type
+        }
+        if let gender = filters.gender {
+            switch gender {
+            case .female:
+                genderButtonTapped(containerView.femaleButton)
+            case .male:
+                genderButtonTapped(containerView.maleButton)
+            case .genderless:
+                genderButtonTapped(containerView.genderlessButton)
+            case .unknown:
+                genderButtonTapped(containerView.unknownGenderButton)
+            }
+        }
+        
+    }
+    
+    fileprivate func configureButtonActions() {
         self.containerView.searchButton.addTarget(self, action: #selector(searchButtonTapped(_:)), for: .touchUpInside)
         self.containerView.femaleButton.addTarget(self, action: #selector(genderButtonTapped(_:)), for: .touchUpInside)
         self.containerView.maleButton.addTarget(self, action: #selector(genderButtonTapped(_:)), for: .touchUpInside)
@@ -143,7 +185,6 @@ public class CharacterFilterBackdrop: UIView {
         self.containerView.aliveButton.addTarget(self, action: #selector(statusButtonTapped(_:)), for: .touchUpInside)
         self.containerView.deadButton.addTarget(self, action: #selector(statusButtonTapped(_:)), for: .touchUpInside)
         self.containerView.unknownStatusButton.addTarget(self, action: #selector(statusButtonTapped(_:)), for: .touchUpInside)
-        viewMain.addSubview(characterFilterBackdrop)
     }
     
     fileprivate func getCharacterFilterBackdropOverlay() -> CharacterFilterBackdrop {
