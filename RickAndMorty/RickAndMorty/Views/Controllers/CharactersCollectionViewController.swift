@@ -26,12 +26,12 @@ class CharactersCollectionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.presenter.setCharacterViewProtocol(viewProtocol: self)
         self.setNavigationBar()
         self.setUpFilterLabel()
         self.setInitifialFilters()
         self.configureCharactersView()
         self.presenter.loadCharacters()
-        self.presenter.setCharacterViewProtocol(viewProtocol: self)
     }
     
     func setNavigationBar() {
@@ -109,10 +109,11 @@ class CharactersCollectionViewController: UIViewController {
 
 extension CharactersCollectionViewController: CharactersCollectionViewProtocol {
     func loadCharactersCollection(characters: [Character], filters: CharacterFilterParams?) {
-        self.filters = filters
-        if self.filters != nil {
+        if self.filters != filters {
             self.modifyFilterView()
-        } else {
+        }
+        self.filters = filters
+        if self.filters == nil {
             self.unfilteredCharacters = characters
         }
         DispatchQueue.main.async {

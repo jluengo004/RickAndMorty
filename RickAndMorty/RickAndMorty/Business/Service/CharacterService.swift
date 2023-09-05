@@ -21,7 +21,7 @@ public enum CharacterGender: String {
     case unknown = "unkonwn"
 }
 
-public class CharacterFilterParams {
+public class CharacterFilterParams: Equatable {
     var ids: [String]?
     var name: String?
     var status: CharacterStatus?
@@ -38,8 +38,18 @@ public class CharacterFilterParams {
         self.gender = gender
     }
     
-    func getQueryFilterParams() -> [URLQueryItem] {
+    public static func == (lhs: CharacterFilterParams, rhs: CharacterFilterParams) -> Bool {
+        return (lhs.ids == rhs.ids &&
+                lhs.name == rhs.name &&
+                lhs.status == rhs.status &&
+                lhs.species == rhs.species &&
+                lhs.type == rhs.type &&
+                lhs.gender == rhs.gender)
+    }
+    
+    func getQueryFilterParams(page: Int) -> [URLQueryItem] {
         var queryParams: [URLQueryItem] = []
+        queryParams.append(URLQueryItem(name: "page", value: String(page)))
         if let name = name, !name.isEmpty {
             queryParams.append(URLQueryItem(name: "name", value: name))
         }
@@ -127,9 +137,9 @@ public class CharacterService {
         }
     }
     
-    public func getFilteredCharacters(params: CharacterFilterParams, completion: @escaping (RMResult<CharacterPagination, String>) -> Void) {
+    public func getFilteredCharacters(params: CharacterFilterParams, page: Int, completion: @escaping (RMResult<CharacterPagination, String>) -> Void) {
         var urlComps = URLComponents(string: baseURL)
-        urlComps?.queryItems = params.getQueryFilterParams()
+        urlComps?.queryItems = params.getQueryFilterParams(page: page)
         guard let url = urlComps?.url else {
             completion(RMResult.failure("param error"))
             return

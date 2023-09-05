@@ -28,7 +28,9 @@ class CharactersCollectionPresenter {
             case .success(let charactersPagination):
                 self.characters.append(contentsOf: charactersPagination.results)
                 self.charactersCollectionVCProtocol?.loadCharactersCollection(characters: self.characters, filters: nil)
-                self.characterPageCount += 1
+                if charactersPagination.info.next != nil {
+                    self.characterPageCount += 1
+                }
                 
             case .failure(let error):
                 print(error)
@@ -39,12 +41,14 @@ class CharactersCollectionPresenter {
     func loadFilterCharacters() {
         let service = CharacterService()
         guard let filters = self.filters else { return }
-        service.getFilteredCharacters(params: filters) { result in
+        service.getFilteredCharacters(params: filters, page: filteredCharacterPageCount) { result in
             switch result {
             case .success(let filteredCharactersPagination):
                 self.filteredCharacters.append(contentsOf: filteredCharactersPagination.results)
                 self.charactersCollectionVCProtocol?.loadCharactersCollection(characters: self.filteredCharacters, filters: filters)
-                self.filteredCharacterPageCount += 1
+                if filteredCharactersPagination.info.next != nil {
+                    self.filteredCharacterPageCount += 1
+                }
                 
             case .failure(_):
                 self.charactersCollectionVCProtocol?.emptyFilterCharacters()
