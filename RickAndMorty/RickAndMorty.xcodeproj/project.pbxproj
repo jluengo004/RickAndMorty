@@ -53,6 +53,10 @@
 		4DFCDE852AA64DA700EC588A /* FilterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFCDE832AA64DA700EC588A /* FilterButton.swift */; };
 		4DFCDE872AA72E1100EC588A /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFCDE862AA72E1000EC588A /* UIViewControllerExtension.swift */; };
 		4DFCDE882AA72E1100EC588A /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFCDE862AA72E1000EC588A /* UIViewControllerExtension.swift */; };
+		4DFCDE8B2AA737DA00EC588A /* CharacterPortraitCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFCDE8A2AA737DA00EC588A /* CharacterPortraitCollectionViewCell.swift */; };
+		4DFCDE8C2AA737DA00EC588A /* CharacterPortraitCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFCDE8A2AA737DA00EC588A /* CharacterPortraitCollectionViewCell.swift */; };
+		4DFCDE8E2AA7385A00EC588A /* CharacterPortraitCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4DFCDE8D2AA7385A00EC588A /* CharacterPortraitCollectionViewCell.xib */; };
+		4DFCDE8F2AA7385A00EC588A /* CharacterPortraitCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4DFCDE8D2AA7385A00EC588A /* CharacterPortraitCollectionViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,6 +109,8 @@
 		4DE0A5E42AA4F3DF0067317F /* CharacterCollecionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterCollecionViewCell.swift; sourceTree = "<group>"; };
 		4DFCDE832AA64DA700EC588A /* FilterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterButton.swift; sourceTree = "<group>"; };
 		4DFCDE862AA72E1000EC588A /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
+		4DFCDE8A2AA737DA00EC588A /* CharacterPortraitCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterPortraitCollectionViewCell.swift; sourceTree = "<group>"; };
+		4DFCDE8D2AA7385A00EC588A /* CharacterPortraitCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CharacterPortraitCollectionViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -253,6 +259,8 @@
 				4DCBAE2F2AA4FB34004A0F69 /* CharactersCollectionView.xib */,
 				4DCBAE322AA5F5A8004A0F69 /* CharacterFilterBackdrop.swift */,
 				4DCBAE352AA5F5BA004A0F69 /* CharacterFilterBackdrop.xib */,
+				4DFCDE8A2AA737DA00EC588A /* CharacterPortraitCollectionViewCell.swift */,
+				4DFCDE8D2AA7385A00EC588A /* CharacterPortraitCollectionViewCell.xib */,
 			);
 			path = Subviews;
 			sourceTree = "<group>";
@@ -371,6 +379,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4DE0A58B2AA49B4F0067317F /* LaunchScreen.storyboard in Resources */,
+				4DFCDE8E2AA7385A00EC588A /* CharacterPortraitCollectionViewCell.xib in Resources */,
 				4DE0A5882AA49B4F0067317F /* Assets.xcassets in Resources */,
 				4DE0A5E32AA4F3D70067317F /* CharacterCollecionViewCell.xib in Resources */,
 				4DCBAE362AA5F5BA004A0F69 /* CharacterFilterBackdrop.xib in Resources */,
@@ -385,6 +394,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4DCBAE312AA4FB34004A0F69 /* CharactersCollectionView.xib in Resources */,
+				4DFCDE8F2AA7385A00EC588A /* CharacterPortraitCollectionViewCell.xib in Resources */,
 				4DCBAE372AA5F5BA004A0F69 /* CharacterFilterBackdrop.xib in Resources */,
 				4DE0A5CA2AA4E11E0067317F /* CharactersCollectionViewController.xib in Resources */,
 			);
@@ -410,6 +420,7 @@
 				4DE0A5B62AA49D250067317F /* NetworkManager.swift in Sources */,
 				4DE0A5BB2AA49F810067317F /* CharacterModel.swift in Sources */,
 				4DE0A57F2AA49B4D0067317F /* AppDelegate.swift in Sources */,
+				4DFCDE8B2AA737DA00EC588A /* CharacterPortraitCollectionViewCell.swift in Sources */,
 				4DE0A5D82AA4ED920067317F /* EpisodePagination.swift in Sources */,
 				4DE0A5DE2AA4EED60067317F /* CharactersCollectionPresenter.swift in Sources */,
 				4DE0A5C32AA4A0BF0067317F /* EpisodeModel.swift in Sources */,
@@ -431,6 +442,7 @@
 			files = (
 				4DE0A5C02AA4A05A0067317F /* LocationModel.swift in Sources */,
 				4DE0A5BC2AA49F810067317F /* CharacterModel.swift in Sources */,
+				4DFCDE8C2AA737DA00EC588A /* CharacterPortraitCollectionViewCell.swift in Sources */,
 				4DE0A5D62AA4E8470067317F /* PaginationInfo.swift in Sources */,
 				4DE0A5B72AA49D250067317F /* NetworkManager.swift in Sources */,
 				4DFCDE882AA72E1100EC588A /* UIViewControllerExtension.swift in Sources */,

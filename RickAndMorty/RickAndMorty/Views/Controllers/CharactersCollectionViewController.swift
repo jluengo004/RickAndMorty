@@ -133,7 +133,12 @@ extension CharactersCollectionViewController: CharactersCollectionViewDelegate {
         } else {
             self.presenter.loadCharacters()
         }
-        
+    }
+    
+    func loadImage(from url: URL, completion: @escaping (UIImage?) -> Void) {
+        self.presenter.downloadImage(from: url) { image in
+            completion(image)
+        }
     }
     
 }
