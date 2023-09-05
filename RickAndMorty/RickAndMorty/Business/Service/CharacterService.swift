@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 public enum CharacterStatus: String {
     case alive = "alive"
@@ -58,25 +59,33 @@ public class CharacterFilterParams {
         return queryParams
     }
     
-    func getLabelFilterParams() -> String {
-        var filterString = ""
+    func getLabelFilterParams() -> NSMutableAttributedString {
+        var filterAttributedString = NSMutableAttributedString(string: "")
         if let name = name, !name.isEmpty {
-            filterString += "Name: \(name)  "
+            concatenateBoldAndValueString(mainString: &filterAttributedString, title: "Name", value: name)
         }
         if let status = status {
-            filterString += "Status: \(status.rawValue)  "
+            concatenateBoldAndValueString(mainString: &filterAttributedString, title: "Status", value: status.rawValue)
         }
         if let species = species, !species.isEmpty {
-            filterString += "Species: \(species)  "
+            concatenateBoldAndValueString(mainString: &filterAttributedString, title: "Species", value: species)
         }
         if let type = type, !type.isEmpty {
-            filterString += "Type: \(type)  "
+            concatenateBoldAndValueString(mainString: &filterAttributedString, title: "Type", value: type)
         }
         if let gender = gender {
-            filterString += "Gender: \(gender.rawValue)  "
+            concatenateBoldAndValueString(mainString: &filterAttributedString, title: "Gender", value: gender.rawValue)
         }
         
-        return filterString
+        return filterAttributedString
+    }
+    
+    private func concatenateBoldAndValueString(mainString: inout NSMutableAttributedString, title: String, value: String) {
+        let boldAttribute = [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 12)]
+        let titleBoldAttributedString = NSMutableAttributedString(string: "\(title): ", attributes: boldAttribute)
+        let valueAttributedString = NSMutableAttributedString(string: "\(value)  ")
+        mainString.append(titleBoldAttributedString)
+        mainString.append(valueAttributedString)
     }
     
     func getCharactersIDParams() -> String {
