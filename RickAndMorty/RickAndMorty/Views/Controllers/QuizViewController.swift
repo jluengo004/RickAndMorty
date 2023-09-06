@@ -15,7 +15,7 @@ protocol QuizViewProtocol: AnyObject {
 }
 
 class QuizViewController: UIViewController {
-    private let presenter = QuizPresenter()
+    private let presenter: QuizPresenter?
     private var charactersViews: CharactersCollectionView?
     private var episode: Episode?
     private var charactersToGuess: [Character]?
@@ -25,30 +25,47 @@ class QuizViewController: UIViewController {
 
     @IBOutlet weak var episodeLabel: UILabel!
     @IBOutlet weak var episodeImageView: UIImageView!
+    @IBOutlet weak var synopsisLabel: UILabel!
     @IBOutlet weak var guessLabel: UILabel!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var portraitsStackView: UIStackView!
     @IBOutlet weak var characterNamesTableView: UITableView!
     
+    static func create() -> QuizViewController {
+        let presenter = QuizPresenter()
+        let view = QuizViewController(presenter: presenter)
+        presenter.setQuizViewProtocol(viewProtocol: view)
+        return view
+    }
+    
+    init(presenter: QuizPresenter) {
+        self.presenter = presenter
+        super.init(nibName: nil, bundle: Bundle(for: type(of: self)))
+    }
+    
+    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.presenter.setQuizViewProtocol(viewProtocol: self)
+        self.presenter?.setQuizViewProtocol(viewProtocol: self)
         self.setNavigationBar()
         self.configureCharactersNameTable()
         self.configureCharactersView()
-        presenter.loadAllEpisodes()
-        presenter.loadAllCharacters()
+        self.presenter?.loadAllEpisodes()
+        self.presenter?.loadAllCharacters()
     }
     
     func setNavigationBar() {
+        let textAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+        navigationController?.navigationBar.titleTextAttributes = textAttributes
         self.title = "QUIZ"
     }
     
     func loadAndConfigureView() {
-        self.allCharacters = self.presenter.getCharacters()
+        self.allCharacters = self.presenter?.getCharacters()
         self.filteredCharacters = allCharacters
         self.nameTextField.delegate = self
-        self.presenter.selectAndLoadEpisode { episode in
+        self.presenter?.selectAndLoadEpisode { episode in
             self.episode = episode
             self.configureView()
         }
@@ -71,6 +88,7 @@ class QuizViewController: UIViewController {
             self?.downloadEpisodeImage()
             self?.episodeLabel.text = self?.episode?.name
             self?.episodeLabel.font = UIFont.boldSystemFont(ofSize: 17.0)
+            self?.synopsisLabel.text = self?.episode?.synopsis
             self?.guessLabel.text = "Guess the characters that appear in this episode"
             
             let unsolvedCharacter = Character(id: 9999, name: "¿¿??")
@@ -84,7 +102,7 @@ class QuizViewController: UIViewController {
     
     func downloadEpisodeImage() {
         if let imageURL = self.episode?.image {
-            self.presenter.downloadImage(from: imageURL) { image in
+            self.presenter?.downloadImage(from: imageURL) { image in
                 DispatchQueue.main.async() { [weak self] in
                     self?.episodeImageView.image = image
                 }
@@ -128,9 +146,13 @@ extension QuizViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60.0
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let filteredCharacters = filteredCharacters {
-            self.presenter.checkIfGuessedCorrectCharacter(guessedCharacter: filteredCharacters[indexPath.row])
+            self.presenter?.checkIfGuessedCorrectCharacter(guessedCharacter: filteredCharacters[indexPath.row])
         }
     }
     
@@ -144,6 +166,7 @@ extension QuizViewController: QuizViewProtocol {
     func loadCorrectGuess(character: Character) {
         self.nameTextField.layer.borderColor = UIColor.green.cgColor
         textFieldDidEndEditing(nameTextField)
+        self.nameTextField.text = ""
         self.filteredCharacters = allCharacters
         self.characterNamesTableView.reloadData()
         
@@ -180,7 +203,7 @@ extension QuizViewController: QuizViewProtocol {
 
 extension QuizViewController: CharacterCollecionViewCellDelegate {
     func loadImage(from url: URL, completion: @escaping (UIImage?) -> Void) {
-        self.presenter.downloadImage(from: url) { image in
+        self.presenter?.downloadImage(from: url) { image in
             completion(image)
         }
     }
