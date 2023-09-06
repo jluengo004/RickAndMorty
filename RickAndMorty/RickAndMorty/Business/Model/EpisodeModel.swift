@@ -12,7 +12,7 @@ public struct Episode: Decodable {
     var name: String
     var airDate: String?
     var episode: String?
-    var characters: [String]
+    var characters: [URL]
     var url: URL?
     var created: String?
     var image: URL?
@@ -34,7 +34,7 @@ public struct Episode: Decodable {
         self.name = try container.decode(String.self, forKey: .name)
         self.airDate = try container.decode(String?.self, forKey: .airDate)
         self.episode = try container.decode(String?.self, forKey: .episode)
-        self.characters = try container.decode([String].self, forKey: .characters)
+        self.characters = try container.decode([URL].self, forKey: .characters)
         self.url = try container.decode(URL?.self, forKey: .url)
         self.created = try container.decode(String?.self, forKey: .created)
     }

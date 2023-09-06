@@ -16,11 +16,21 @@ class QuizPresenter {
     private var episodePageCount = 1
     private var characters: [Character] = []
     private var episodes: [Episode] = []
+    private var quizEpisode: Episode?
     private let imageCache = NSCache<AnyObject, AnyObject>()
     private let baseCustomEpisodeURL = "https://rickandmorty.fandom.com/wiki/"
     
     func setQuizViewProtocol(viewProtocol: QuizViewProtocol) {
         self.quizVCProtocol = viewProtocol
+    }
+    
+    func checkIfGuessedCorrectCharacter(guessedCharacter: Character) {
+        let correctCharacter = quizEpisode?.characters.filter { $0 == guessedCharacter.url }.first
+        if correctCharacter == nil {
+            self.quizVCProtocol?.loadIncorrectGuess()
+        } else {
+            self.quizVCProtocol?.loadCorrectGuess(character: guessedCharacter)
+        }
     }
     
     func selectAndLoadEpisode(completion: @escaping (Episode?) -> Void) {
@@ -32,6 +42,7 @@ class QuizPresenter {
             switch result {
             case .success(let response):
                 episode.setCustomData(info: response)
+                self.quizEpisode = episode
                 completion(episode)
             case .failure(let errorModel):
                 print (errorModel)

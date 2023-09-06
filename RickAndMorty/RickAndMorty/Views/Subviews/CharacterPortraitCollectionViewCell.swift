@@ -25,6 +25,8 @@ class CharacterPortraitCollectionViewCell: UICollectionViewCell {
         self.nameLabel.text = character.name
         self.nameLabel.font = UIFont.boldSystemFont(ofSize: 17.0)
         self.nameLabel.tintColor = UIColor.white
+        self.nameLabel.allowsDefaultTighteningForTruncation = true
+        self.nameLabel.adjustsFontSizeToFitWidth = true
         self.imageView.layer.cornerRadius = 10
         
         if let imageURL = character.image {
