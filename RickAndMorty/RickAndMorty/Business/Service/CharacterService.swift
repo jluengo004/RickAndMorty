@@ -117,16 +117,6 @@ public class CharacterService {
     private let baseURL = "https://rickandmortyapi.com/api/character/"
     private let networkManager = NetworkManager()
     
-    public func getAllCharacters(completion: @escaping (RMResult<CharacterPagination, String>) -> Void) {
-        guard let url = URL(string: baseURL) else {
-            completion(RMResult.failure("url error"))
-            return
-        }
-        startCharacterPaginationNetworkCall(url: url) { result in
-            completion(result)
-        }
-    }
-    
     public func getCharacterPage(page: Int, completion: @escaping (RMResult<CharacterPagination, String>) -> Void) {
         guard let url = URL(string: baseURL + "?page=\(page)") else {
             completion(RMResult.failure("url error"))
@@ -146,36 +136,6 @@ public class CharacterService {
         }
         startCharacterPaginationNetworkCall(url: url) { result in
             completion(result)
-        }
-    }
-    
-    public func getCharactersByID(params: CharacterFilterParams, completion: @escaping (RMResult<[Character], String>) -> Void) {
-        guard let url = URL(string: baseURL + params.getCharactersIDParams()) else {
-            completion(RMResult.failure("url error"))
-            return
-        }
-        startCharactersNetworkCall(url: url) { result in
-            completion(result)
-        }
-    }
-    
-    
-    private func startCharactersNetworkCall(url: URL, completion: @escaping (RMResult<[Character], String>) -> Void) {
-        networkManager.httpGet(url: url) { result in
-            switch result {
-            case .success(let charactersData):
-                if let characters = try? JSONDecoder().decode([Character].self, from: charactersData) {
-                    let charactersResult = RMResult<[Character], String>.success(characters)
-                    completion(charactersResult)
-                } else {
-                    let codingError = RMResult<[Character], String>.failure("coding error")
-                    completion(codingError)
-                }
-                
-            case .failure(let error):
-                let codingError = RMResult<[Character], String>.failure(error)
-                completion(codingError)
-            }
         }
     }
     

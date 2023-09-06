@@ -18,10 +18,12 @@ class CharactersCollectionView: UIView  {
     private var isPageRefreshing: Bool = false
     public var selectedIndexPath: IndexPath?
     weak var delegate: CharactersCollectionViewDelegate?
+    private var isQuiz = false
     
     @IBOutlet weak var charactersCollectionView: UICollectionView!
     
-    func initialize() {
+    func initialize(isQuiz: Bool = false) {
+        self.isQuiz = isQuiz
         registerCells()
     }
 
@@ -84,17 +86,19 @@ extension CharactersCollectionView: UICollectionViewDelegate, UICollectionViewDa
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath != self.selectedIndexPath {
-            if let selectedIndex = self.selectedIndexPath {
+        if !isQuiz {
+            if indexPath != self.selectedIndexPath {
+                if let selectedIndex = self.selectedIndexPath {
+                    self.selectedIndexPath = indexPath
+                    self.charactersCollectionView.reloadItems(at: [selectedIndex])
+                }
                 self.selectedIndexPath = indexPath
-                self.charactersCollectionView.reloadItems(at: [selectedIndex])
+                self.charactersCollectionView.reloadItems(at: [indexPath])
+                self.charactersCollectionView.scrollToItem(at: indexPath, at: .top, animated: true)
+            } else {
+                self.selectedIndexPath = nil
+                self.charactersCollectionView.reloadItems(at: [indexPath])
             }
-            self.selectedIndexPath = indexPath
-            self.charactersCollectionView.reloadItems(at: [indexPath])
-            self.charactersCollectionView.scrollToItem(at: indexPath, at: .top, animated: true)
-        } else {
-            self.selectedIndexPath = nil
-            self.charactersCollectionView.reloadItems(at: [indexPath])
         }
     }
     
@@ -102,7 +106,11 @@ extension CharactersCollectionView: UICollectionViewDelegate, UICollectionViewDa
         if indexPath == self.selectedIndexPath {
             return CGSize(width: 380, height: 208)
         } else {
-            return CGSize(width: 180, height: 235)
+            if isQuiz {
+                return CGSize(width: 100, height: 150)
+            } else {
+                return CGSize(width: 180, height: 235)
+            }
         }
     }
     

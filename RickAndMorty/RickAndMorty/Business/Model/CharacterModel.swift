@@ -36,6 +36,26 @@ public struct Character: Decodable {
         case created
     }
     
+    init(id: Int, name: String, status: String? = nil,
+         species: String? = nil, type: String? = nil,
+         gender: String? = nil, origin: NameWithURL? = nil,
+         location: NameWithURL? = nil, image: URL? = nil,
+         episode: [URL] = [], url: URL? = nil, created: String? = nil) {
+        self.id = id
+        self.name = name
+        self.status = status
+        self.species = species
+        self.type = type
+        self.gender = gender
+        self.origin = origin
+        self.location = location
+        self.image = image
+        self.episode = episode
+        self.url = url
+        self.created = created
+        
+    }
+    
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.id = try container.decode(Int.self, forKey: .id)

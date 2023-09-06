@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4D3B5C6C2AA883690018B0AD /* CharacterNameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3B5C6B2AA883690018B0AD /* CharacterNameTableViewCell.swift */; };
+		4D3B5C6D2AA883690018B0AD /* CharacterNameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3B5C6B2AA883690018B0AD /* CharacterNameTableViewCell.swift */; };
+		4D3B5C6F2AA883700018B0AD /* CharacterNameTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D3B5C6E2AA883700018B0AD /* CharacterNameTableViewCell.xib */; };
+		4D3B5C702AA883700018B0AD /* CharacterNameTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D3B5C6E2AA883700018B0AD /* CharacterNameTableViewCell.xib */; };
 		4DCBAE2D2AA4FB2A004A0F69 /* CharactersCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCBAE2C2AA4FB2A004A0F69 /* CharactersCollectionView.swift */; };
 		4DCBAE2E2AA4FB2A004A0F69 /* CharactersCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCBAE2C2AA4FB2A004A0F69 /* CharactersCollectionView.swift */; };
 		4DCBAE302AA4FB34004A0F69 /* CharactersCollectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4DCBAE2F2AA4FB34004A0F69 /* CharactersCollectionView.xib */; };
@@ -62,6 +66,18 @@
 		4DFCDE9A2AA7968800EC588A /* Pods_RickAndMorty.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46634009711B5A91E4DE2A5A /* Pods_RickAndMorty.framework */; };
 		4DFCDE9D2AA797A400EC588A /* RealmObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFCDE9C2AA797A400EC588A /* RealmObject.swift */; };
 		4DFCDE9E2AA797A400EC588A /* RealmObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFCDE9C2AA797A400EC588A /* RealmObject.swift */; };
+		4DFCDEA02AA7AC3800EC588A /* HTMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFCDE9F2AA7AC3800EC588A /* HTMLParser.swift */; };
+		4DFCDEA12AA7AC3800EC588A /* HTMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFCDE9F2AA7AC3800EC588A /* HTMLParser.swift */; };
+		4DFCDEA32AA7ADCB00EC588A /* EpisodeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFCDEA22AA7ADCB00EC588A /* EpisodeService.swift */; };
+		4DFCDEA42AA7ADCB00EC588A /* EpisodeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFCDEA22AA7ADCB00EC588A /* EpisodeService.swift */; };
+		4DFCDEA62AA7C07300EC588A /* QuizPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFCDEA52AA7C07300EC588A /* QuizPresenter.swift */; };
+		4DFCDEA72AA7C07300EC588A /* QuizPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFCDEA52AA7C07300EC588A /* QuizPresenter.swift */; };
+		4DFCDEA92AA7C48500EC588A /* ImageLoadingAndCaching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFCDEA82AA7C48500EC588A /* ImageLoadingAndCaching.swift */; };
+		4DFCDEAA2AA7C48500EC588A /* ImageLoadingAndCaching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFCDEA82AA7C48500EC588A /* ImageLoadingAndCaching.swift */; };
+		4DFCDEAC2AA853C900EC588A /* QuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFCDEAB2AA853C900EC588A /* QuizViewController.swift */; };
+		4DFCDEAD2AA853C900EC588A /* QuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFCDEAB2AA853C900EC588A /* QuizViewController.swift */; };
+		4DFCDEAF2AA853D400EC588A /* QuizViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4DFCDEAE2AA853D300EC588A /* QuizViewController.xib */; };
+		4DFCDEB02AA853D400EC588A /* QuizViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4DFCDEAE2AA853D300EC588A /* QuizViewController.xib */; };
 		5D594AD1BDD88FDC8F5722B9 /* Pods_RickAndMortyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D14CF2872926AAC19F1E7B3F /* Pods_RickAndMortyTests.framework */; };
 		EA314F66C8F2F59B5D1E8CFF /* Pods_RickAndMorty_RickAndMortyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 737DC184A6DAFC617F68A1A4 /* Pods_RickAndMorty_RickAndMortyUITests.framework */; };
 /* End PBXBuildFile section */
@@ -86,6 +102,8 @@
 /* Begin PBXFileReference section */
 		15BB1E96125C1475B968104B /* Pods-RickAndMorty-RickAndMortyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RickAndMorty-RickAndMortyUITests.release.xcconfig"; path = "Target Support Files/Pods-RickAndMorty-RickAndMortyUITests/Pods-RickAndMorty-RickAndMortyUITests.release.xcconfig"; sourceTree = "<group>"; };
 		46634009711B5A91E4DE2A5A /* Pods_RickAndMorty.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RickAndMorty.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4D3B5C6B2AA883690018B0AD /* CharacterNameTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterNameTableViewCell.swift; sourceTree = "<group>"; };
+		4D3B5C6E2AA883700018B0AD /* CharacterNameTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CharacterNameTableViewCell.xib; sourceTree = "<group>"; };
 		4DCBAE2C2AA4FB2A004A0F69 /* CharactersCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersCollectionView.swift; sourceTree = "<group>"; };
 		4DCBAE2F2AA4FB34004A0F69 /* CharactersCollectionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CharactersCollectionView.xib; sourceTree = "<group>"; };
 		4DCBAE322AA5F5A8004A0F69 /* CharacterFilterBackdrop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterFilterBackdrop.swift; sourceTree = "<group>"; };
@@ -124,6 +142,12 @@
 		4DFCDE932AA7967700EC588A /* Realm.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Realm.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DFCDE942AA7967700EC588A /* RealmSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RealmSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DFCDE9C2AA797A400EC588A /* RealmObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmObject.swift; sourceTree = "<group>"; };
+		4DFCDE9F2AA7AC3800EC588A /* HTMLParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLParser.swift; sourceTree = "<group>"; };
+		4DFCDEA22AA7ADCB00EC588A /* EpisodeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeService.swift; sourceTree = "<group>"; };
+		4DFCDEA52AA7C07300EC588A /* QuizPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizPresenter.swift; sourceTree = "<group>"; };
+		4DFCDEA82AA7C48500EC588A /* ImageLoadingAndCaching.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoadingAndCaching.swift; sourceTree = "<group>"; };
+		4DFCDEAB2AA853C900EC588A /* QuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewController.swift; sourceTree = "<group>"; };
+		4DFCDEAE2AA853D300EC588A /* QuizViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QuizViewController.xib; sourceTree = "<group>"; };
 		56F6C08B2610DB64FA4F78D9 /* Pods-RickAndMortyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RickAndMortyTests.debug.xcconfig"; path = "Target Support Files/Pods-RickAndMortyTests/Pods-RickAndMortyTests.debug.xcconfig"; sourceTree = "<group>"; };
 		737DC184A6DAFC617F68A1A4 /* Pods_RickAndMorty_RickAndMortyUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RickAndMorty_RickAndMortyUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DC533296729623A09D0B89D /* Pods-RickAndMortyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RickAndMortyTests.release.xcconfig"; path = "Target Support Files/Pods-RickAndMortyTests/Pods-RickAndMortyTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -246,6 +270,7 @@
 			isa = PBXGroup;
 			children = (
 				4DE0A5DD2AA4EED60067317F /* CharactersCollectionPresenter.swift */,
+				4DFCDEA52AA7C07300EC588A /* QuizPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -272,9 +297,10 @@
 			isa = PBXGroup;
 			children = (
 				4DE0A5B52AA49D250067317F /* NetworkManager.swift */,
-				4DE0A5C52AA4AFDA0067317F /* CharacterService.swift */,
 				4DFCDE902AA7907F00EC588A /* RealmManager.swift */,
 				4DFCDE9C2AA797A400EC588A /* RealmObject.swift */,
+				4DE0A5C52AA4AFDA0067317F /* CharacterService.swift */,
+				4DFCDEA22AA7ADCB00EC588A /* EpisodeService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -298,6 +324,8 @@
 			children = (
 				4DE0A5CE2AA4E17C0067317F /* CharactersCollectionViewController.swift */,
 				4DE0A5C82AA4E11E0067317F /* CharactersCollectionViewController.xib */,
+				4DFCDEAB2AA853C900EC588A /* QuizViewController.swift */,
+				4DFCDEAE2AA853D300EC588A /* QuizViewController.xib */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -313,6 +341,8 @@
 				4DCBAE352AA5F5BA004A0F69 /* CharacterFilterBackdrop.xib */,
 				4DFCDE8A2AA737DA00EC588A /* CharacterPortraitCollectionViewCell.swift */,
 				4DFCDE8D2AA7385A00EC588A /* CharacterPortraitCollectionViewCell.xib */,
+				4D3B5C6B2AA883690018B0AD /* CharacterNameTableViewCell.swift */,
+				4D3B5C6E2AA883700018B0AD /* CharacterNameTableViewCell.xib */,
 			);
 			path = Subviews;
 			sourceTree = "<group>";
@@ -322,6 +352,8 @@
 			children = (
 				4DFCDE832AA64DA700EC588A /* FilterButton.swift */,
 				4DFCDE862AA72E1000EC588A /* UIViewControllerExtension.swift */,
+				4DFCDE9F2AA7AC3800EC588A /* HTMLParser.swift */,
+				4DFCDEA82AA7C48500EC588A /* ImageLoadingAndCaching.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -356,7 +388,6 @@
 				4DE0A58D2AA49B4F0067317F /* Sources */,
 				4DE0A58E2AA49B4F0067317F /* Frameworks */,
 				4DE0A58F2AA49B4F0067317F /* Resources */,
-				1E30389144191DCA6466F949 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -438,11 +469,13 @@
 			files = (
 				4DE0A58B2AA49B4F0067317F /* LaunchScreen.storyboard in Resources */,
 				4DFCDE8E2AA7385A00EC588A /* CharacterPortraitCollectionViewCell.xib in Resources */,
+				4DFCDEAF2AA853D400EC588A /* QuizViewController.xib in Resources */,
 				4DE0A5882AA49B4F0067317F /* Assets.xcassets in Resources */,
 				4DE0A5E32AA4F3D70067317F /* CharacterCollecionViewCell.xib in Resources */,
 				4DCBAE362AA5F5BA004A0F69 /* CharacterFilterBackdrop.xib in Resources */,
 				4DE0A5862AA49B4D0067317F /* Main.storyboard in Resources */,
 				4DCBAE302AA4FB34004A0F69 /* CharactersCollectionView.xib in Resources */,
+				4D3B5C6F2AA883700018B0AD /* CharacterNameTableViewCell.xib in Resources */,
 				4DE0A5C92AA4E11E0067317F /* CharactersCollectionViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -451,7 +484,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4DFCDEB02AA853D400EC588A /* QuizViewController.xib in Resources */,
 				4DCBAE312AA4FB34004A0F69 /* CharactersCollectionView.xib in Resources */,
+				4D3B5C702AA883700018B0AD /* CharacterNameTableViewCell.xib in Resources */,
 				4DFCDE8F2AA7385A00EC588A /* CharacterPortraitCollectionViewCell.xib in Resources */,
 				4DCBAE372AA5F5BA004A0F69 /* CharacterFilterBackdrop.xib in Resources */,
 				4DE0A5CA2AA4E11E0067317F /* CharactersCollectionViewController.xib in Resources */,
@@ -483,23 +518,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RickAndMorty-RickAndMortyUITests/Pods-RickAndMorty-RickAndMortyUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		1E30389144191DCA6466F949 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-RickAndMortyTests/Pods-RickAndMortyTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-RickAndMortyTests/Pods-RickAndMortyTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RickAndMortyTests/Pods-RickAndMortyTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		3CF86E92B41D25FF9FBC42F0 /* [CP] Embed Pods Frameworks */ = {
@@ -593,8 +611,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				4DE0A5CF2AA4E17C0067317F /* CharactersCollectionViewController.swift in Sources */,
+				4D3B5C6C2AA883690018B0AD /* CharacterNameTableViewCell.swift in Sources */,
+				4DFCDEA92AA7C48500EC588A /* ImageLoadingAndCaching.swift in Sources */,
 				4DCBAE332AA5F5A8004A0F69 /* CharacterFilterBackdrop.swift in Sources */,
 				4DFCDE872AA72E1100EC588A /* UIViewControllerExtension.swift in Sources */,
+				4DFCDEA32AA7ADCB00EC588A /* EpisodeService.swift in Sources */,
 				4DE0A5B62AA49D250067317F /* NetworkManager.swift in Sources */,
 				4DE0A5BB2AA49F810067317F /* CharacterModel.swift in Sources */,
 				4DE0A57F2AA49B4D0067317F /* AppDelegate.swift in Sources */,
@@ -603,6 +624,7 @@
 				4DFCDE9D2AA797A400EC588A /* RealmObject.swift in Sources */,
 				4DE0A5DE2AA4EED60067317F /* CharactersCollectionPresenter.swift in Sources */,
 				4DE0A5C32AA4A0BF0067317F /* EpisodeModel.swift in Sources */,
+				4DFCDEA02AA7AC3800EC588A /* HTMLParser.swift in Sources */,
 				4DFCDE842AA64DA700EC588A /* FilterButton.swift in Sources */,
 				4DE0A5D52AA4E8470067317F /* PaginationInfo.swift in Sources */,
 				4DE0A5BF2AA4A05A0067317F /* LocationModel.swift in Sources */,
@@ -610,9 +632,11 @@
 				4DE0A5812AA49B4D0067317F /* SceneDelegate.swift in Sources */,
 				4DE0A5E52AA4F3DF0067317F /* CharacterCollecionViewCell.swift in Sources */,
 				4DE0A5C62AA4AFDA0067317F /* CharacterService.swift in Sources */,
+				4DFCDEAC2AA853C900EC588A /* QuizViewController.swift in Sources */,
 				4DFCDE912AA7907F00EC588A /* RealmManager.swift in Sources */,
 				4DE0A5DB2AA4EDA00067317F /* LocationPagination.swift in Sources */,
 				4DE0A5D22AA4E7E80067317F /* CharactersPagination.swift in Sources */,
+				4DFCDEA62AA7C07300EC588A /* QuizPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -623,16 +647,22 @@
 				4DE0A5C02AA4A05A0067317F /* LocationModel.swift in Sources */,
 				4DE0A5BC2AA49F810067317F /* CharacterModel.swift in Sources */,
 				4DFCDE8C2AA737DA00EC588A /* CharacterPortraitCollectionViewCell.swift in Sources */,
+				4DFCDEAD2AA853C900EC588A /* QuizViewController.swift in Sources */,
 				4DE0A5D62AA4E8470067317F /* PaginationInfo.swift in Sources */,
 				4DE0A5B72AA49D250067317F /* NetworkManager.swift in Sources */,
+				4DFCDEAA2AA7C48500EC588A /* ImageLoadingAndCaching.swift in Sources */,
 				4DFCDE922AA7907F00EC588A /* RealmManager.swift in Sources */,
 				4DFCDE882AA72E1100EC588A /* UIViewControllerExtension.swift in Sources */,
+				4DFCDEA42AA7ADCB00EC588A /* EpisodeService.swift in Sources */,
 				4DE0A5C72AA4AFDA0067317F /* CharacterService.swift in Sources */,
 				4DE0A5D02AA4E17C0067317F /* CharactersCollectionViewController.swift in Sources */,
+				4DFCDEA12AA7AC3800EC588A /* HTMLParser.swift in Sources */,
 				4DCBAE2E2AA4FB2A004A0F69 /* CharactersCollectionView.swift in Sources */,
 				4DFCDE852AA64DA700EC588A /* FilterButton.swift in Sources */,
 				4DE0A5DF2AA4EED60067317F /* CharactersCollectionPresenter.swift in Sources */,
 				4DFCDE9E2AA797A400EC588A /* RealmObject.swift in Sources */,
+				4DFCDEA72AA7C07300EC588A /* QuizPresenter.swift in Sources */,
+				4D3B5C6D2AA883690018B0AD /* CharacterNameTableViewCell.swift in Sources */,
 				4DE0A5962AA49B4F0067317F /* RickAndMortyTests.swift in Sources */,
 				4DCBAE342AA5F5A8004A0F69 /* CharacterFilterBackdrop.swift in Sources */,
 				4DE0A5D92AA4ED920067317F /* EpisodePagination.swift in Sources */,

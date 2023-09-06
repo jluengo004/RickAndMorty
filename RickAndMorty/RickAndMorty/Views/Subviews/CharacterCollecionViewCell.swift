@@ -15,7 +15,6 @@ protocol CharacterCollecionViewCellDelegate: AnyObject {
 class CharacterCollecionViewCell: UICollectionViewCell {
     static let identifier = "CharacterCollecionViewCell"
     private var character: Character?
-    let imageCache = NSCache<AnyObject, AnyObject>()
     weak var delegate: CharacterCollecionViewCellDelegate?
     
     @IBOutlet private weak var imageView: UIImageView!
