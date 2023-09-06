@@ -13,7 +13,7 @@
             <rect key="frame" x="0.0" y="0.0" width="525" height="491"/>
             <subviews>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="yVu-eg-r8w">
-                    <rect key="frame" x="0.0" y="0.0" width="525" height="471"/>
+                    <rect key="frame" x="0.0" y="0.0" width="525" height="491"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" id="bh5-rF-GCL">
                         <size key="itemSize" width="380" height="208"/>
@@ -26,7 +26,7 @@
             <viewLayoutGuide key="safeArea" id="IYS-fo-8qO"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="yVu-eg-r8w" secondAttribute="bottom" constant="20" symbolic="YES" id="FfO-ag-oyK"/>
+                <constraint firstAttribute="bottom" secondItem="yVu-eg-r8w" secondAttribute="bottom" id="FfO-ag-oyK"/>
                 <constraint firstAttribute="trailing" secondItem="yVu-eg-r8w" secondAttribute="trailing" id="Pby-1b-Okk"/>
                 <constraint firstAttribute="height" constant="491" id="W5P-KI-JVM"/>
                 <constraint firstItem="yVu-eg-r8w" firstAttribute="leading" secondItem="lhw-aY-mmb" secondAttribute="leading" id="hl6-no-i3o"/>

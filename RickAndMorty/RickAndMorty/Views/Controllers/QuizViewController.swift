@@ -22,7 +22,7 @@ class QuizViewController: UIViewController {
     @IBOutlet weak var episodeLabel: UILabel!
     @IBOutlet weak var episodeImageView: UIImageView!
     @IBOutlet weak var guessLabel: UILabel!
-    @IBOutlet weak var stackView: UIStackView!
+    @IBOutlet weak var portraitsStackView: UIStackView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,7 +79,7 @@ class QuizViewController: UIViewController {
         }
         charactersViews.initialize(isQuiz: true)
         charactersViews.delegate = self
-        self.stackView.addArrangedSubview(charactersViews)
+        self.portraitsStackView.addArrangedSubview(charactersViews)
         self.charactersViews = charactersViews
     }
 
