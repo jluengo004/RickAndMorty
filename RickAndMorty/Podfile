@@ -8,6 +8,7 @@ target 'RickAndMorty' do
   # Pods for RickAndMorty
   pod 'RealmSwift'
   pod 'Realm'
+  pod 'SwiftSoup'
   
   target 'RickAndMortyTests' do
     inherit! :search_paths

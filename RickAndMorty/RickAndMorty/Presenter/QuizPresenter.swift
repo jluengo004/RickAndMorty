@@ -9,8 +9,9 @@ import Foundation
 import UIKit
 
 class QuizPresenter {
-    let episodeService = EpisodeService()
-    let characterService = CharacterService()
+    private var quizVCProtocol: QuizViewProtocol?
+    private let episodeService = EpisodeService()
+    private let characterService = CharacterService()
     private var characterPageCount = 1
     private var episodePageCount = 1
     private var characters: [Character] = []
@@ -18,7 +19,11 @@ class QuizPresenter {
     private let imageCache = NSCache<AnyObject, AnyObject>()
     private let baseCustomEpisodeURL = "https://rickandmorty.fandom.com/wiki/"
     
-    func selectAndLoadEpisode() {
+    func setQuizViewProtocol(viewProtocol: QuizViewProtocol) {
+        self.quizVCProtocol = viewProtocol
+    }
+    
+    func selectAndLoadEpisode(completion: @escaping (Episode?) -> Void) {
         var episode = episodes[Int.random(in: 0...(episodes.count - 1))]
         let episodeNameAsURL = episode.name.replacingOccurrences(of: " ", with: "_")
         let episodeCustomURL = URL(string: baseCustomEpisodeURL + episodeNameAsURL)
@@ -27,9 +32,10 @@ class QuizPresenter {
             switch result {
             case .success(let response):
                 episode.setCustomData(info: response)
+                completion(episode)
             case .failure(let errorModel):
                 print (errorModel)
-                return
+                completion(nil)
             }
         }
     }
@@ -50,6 +56,10 @@ class QuizPresenter {
         }
     }
     
+    func getEpisodes() -> [Episode] {
+        return episodes
+    }
+    
     func loadAllCharacters() {
         characterService.getCharacterPage(page: characterPageCount) { result in
             switch result {
@@ -58,12 +68,18 @@ class QuizPresenter {
                 if charactersPagination.info.next != nil {
                     self.characterPageCount += 1
                     self.loadAllCharacters()
+                } else {
+                    self.quizVCProtocol?.loadQuizView()
                 }
                 
             case .failure(let error):
                 print(error)
             }
         }
+    }
+    
+    func getCharacters() -> [Character] {
+        return characters
     }
     
     func downloadImage(from url: URL, completion: @escaping (UIImage?) -> Void) {
