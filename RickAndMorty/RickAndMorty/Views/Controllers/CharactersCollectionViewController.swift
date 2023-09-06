@@ -51,6 +51,7 @@ class CharactersCollectionViewController: UIViewController {
         let textAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
         navigationController?.navigationBar.titleTextAttributes = textAttributes
         self.title = "Multiverse IDs"
+        
         let filterButton: UIBarButtonItem = UIBarButtonItem(title: "", style: UIBarButtonItem.Style.plain, target: self, action: #selector(filterClicked(_:)))
         filterButton.setBackgroundImage(UIImage(named: "filterIcon"), for: .normal, barMetrics: .default)
         self.navigationItem.rightBarButtonItem = filterButton
@@ -93,7 +94,7 @@ class CharactersCollectionViewController: UIViewController {
         }
     }
     
-    @objc func filterClicked(_ sender: Any){
+    @objc func filterClicked(_ sender: Any) {
         self.characterFilterBackdrop = CharacterFilterBackdrop()
         self.characterFilterBackdrop?.addCharacterFilterBackdrop(viewMain: self.view, filters: self.filters, delegate: self)
         characterFilterBackdrop?.containerView.contentView.frame = CGRect(x: characterFilterBackdrop?.containerView.contentView.frame.minX ?? 0,

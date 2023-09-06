@@ -59,6 +59,10 @@ class QuizViewController: UIViewController {
         let textAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
         navigationController?.navigationBar.titleTextAttributes = textAttributes
         self.title = "QUIZ"
+        
+        let filterButton: UIBarButtonItem = UIBarButtonItem(title: "", style: UIBarButtonItem.Style.plain, target: self, action: #selector(refreshClicked(_:)))
+        filterButton.setBackgroundImage(UIImage(named: "refreshIcon"), for: .normal, barMetrics: .default)
+        self.navigationItem.rightBarButtonItem = filterButton
     }
     
     func loadAndConfigureView() {
@@ -121,7 +125,10 @@ class QuizViewController: UIViewController {
         self.portraitsStackView.addArrangedSubview(charactersViews)
         self.charactersViews = charactersViews
     }
-
+    
+    @objc func refreshClicked(_ sender: Any) {
+        self.loadAndConfigureView()
+    }
 }
 
 extension QuizViewController: UITableViewDelegate, UITableViewDataSource {
