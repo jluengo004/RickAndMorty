@@ -11,6 +11,8 @@
 		4D3B5C6D2AA883690018B0AD /* CharacterNameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3B5C6B2AA883690018B0AD /* CharacterNameTableViewCell.swift */; };
 		4D3B5C6F2AA883700018B0AD /* CharacterNameTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D3B5C6E2AA883700018B0AD /* CharacterNameTableViewCell.xib */; };
 		4D3B5C702AA883700018B0AD /* CharacterNameTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D3B5C6E2AA883700018B0AD /* CharacterNameTableViewCell.xib */; };
+		4D3B5C722AA8A5010018B0AD /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3B5C712AA8A5010018B0AD /* HomeViewController.swift */; };
+		4D3B5C732AA8A5010018B0AD /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3B5C712AA8A5010018B0AD /* HomeViewController.swift */; };
 		4DCBAE2D2AA4FB2A004A0F69 /* CharactersCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCBAE2C2AA4FB2A004A0F69 /* CharactersCollectionView.swift */; };
 		4DCBAE2E2AA4FB2A004A0F69 /* CharactersCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCBAE2C2AA4FB2A004A0F69 /* CharactersCollectionView.swift */; };
 		4DCBAE302AA4FB34004A0F69 /* CharactersCollectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4DCBAE2F2AA4FB34004A0F69 /* CharactersCollectionView.xib */; };
@@ -104,6 +106,7 @@
 		46634009711B5A91E4DE2A5A /* Pods_RickAndMorty.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RickAndMorty.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D3B5C6B2AA883690018B0AD /* CharacterNameTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterNameTableViewCell.swift; sourceTree = "<group>"; };
 		4D3B5C6E2AA883700018B0AD /* CharacterNameTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CharacterNameTableViewCell.xib; sourceTree = "<group>"; };
+		4D3B5C712AA8A5010018B0AD /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		4DCBAE2C2AA4FB2A004A0F69 /* CharactersCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersCollectionView.swift; sourceTree = "<group>"; };
 		4DCBAE2F2AA4FB34004A0F69 /* CharactersCollectionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CharactersCollectionView.xib; sourceTree = "<group>"; };
 		4DCBAE322AA5F5A8004A0F69 /* CharacterFilterBackdrop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterFilterBackdrop.swift; sourceTree = "<group>"; };
@@ -241,7 +244,6 @@
 				4DE0A5B02AA49C590067317F /* Presenter */,
 				4DE0A57E2AA49B4D0067317F /* AppDelegate.swift */,
 				4DE0A5802AA49B4D0067317F /* SceneDelegate.swift */,
-				4DE0A5842AA49B4D0067317F /* Main.storyboard */,
 				4DE0A5872AA49B4F0067317F /* Assets.xcassets */,
 				4DE0A5892AA49B4F0067317F /* LaunchScreen.storyboard */,
 				4DE0A58C2AA49B4F0067317F /* Info.plist */,
@@ -326,6 +328,8 @@
 				4DE0A5C82AA4E11E0067317F /* CharactersCollectionViewController.xib */,
 				4DFCDEAB2AA853C900EC588A /* QuizViewController.swift */,
 				4DFCDEAE2AA853D300EC588A /* QuizViewController.xib */,
+				4D3B5C712AA8A5010018B0AD /* HomeViewController.swift */,
+				4DE0A5842AA49B4D0067317F /* Main.storyboard */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -629,6 +633,7 @@
 				4DE0A5D52AA4E8470067317F /* PaginationInfo.swift in Sources */,
 				4DE0A5BF2AA4A05A0067317F /* LocationModel.swift in Sources */,
 				4DCBAE2D2AA4FB2A004A0F69 /* CharactersCollectionView.swift in Sources */,
+				4D3B5C722AA8A5010018B0AD /* HomeViewController.swift in Sources */,
 				4DE0A5812AA49B4D0067317F /* SceneDelegate.swift in Sources */,
 				4DE0A5E52AA4F3DF0067317F /* CharacterCollecionViewCell.swift in Sources */,
 				4DE0A5C62AA4AFDA0067317F /* CharacterService.swift in Sources */,
@@ -655,6 +660,7 @@
 				4DFCDE882AA72E1100EC588A /* UIViewControllerExtension.swift in Sources */,
 				4DFCDEA42AA7ADCB00EC588A /* EpisodeService.swift in Sources */,
 				4DE0A5C72AA4AFDA0067317F /* CharacterService.swift in Sources */,
+				4D3B5C732AA8A5010018B0AD /* HomeViewController.swift in Sources */,
 				4DE0A5D02AA4E17C0067317F /* CharactersCollectionViewController.swift in Sources */,
 				4DFCDEA12AA7AC3800EC588A /* HTMLParser.swift in Sources */,
 				4DCBAE2E2AA4FB2A004A0F69 /* CharactersCollectionView.swift in Sources */,

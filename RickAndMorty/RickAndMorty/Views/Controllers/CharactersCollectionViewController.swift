@@ -13,7 +13,7 @@ protocol CharactersCollectionViewProtocol: AnyObject {
 }
 
 class CharactersCollectionViewController: UIViewController {
-    private let presenter = CharactersCollectionPresenter()
+    private let presenter: CharactersCollectionPresenter?
     private var charactersViews: CharactersCollectionView?
     private var characterFilterBackdrop: CharacterFilterBackdrop?
     private var filters: CharacterFilterParams?
@@ -24,18 +24,34 @@ class CharactersCollectionViewController: UIViewController {
     @IBOutlet weak var dismissFilterButton: UIButton!
     @IBOutlet weak var stackView: UIStackView!
     
+    static func create() -> CharactersCollectionViewController {
+        let presenter = CharactersCollectionPresenter()
+        let view = CharactersCollectionViewController(presenter: presenter)
+        presenter.setCharacterViewProtocol(viewProtocol: view)
+        return view
+    }
+    
+    init(presenter: CharactersCollectionPresenter) {
+        self.presenter = presenter
+        super.init(nibName: nil, bundle: Bundle(for: type(of: self)))
+    }
+    
+    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.presenter.setCharacterViewProtocol(viewProtocol: self)
         self.setNavigationBar()
         self.setUpFilterLabel()
         self.setInitifialFilters()
         self.configureCharactersView()
-        self.presenter.loadCharacters()
+        self.presenter?.loadCharacters()
     }
     
     func setNavigationBar() {
+        let textAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+        navigationController?.navigationBar.titleTextAttributes = textAttributes
         self.title = "Multiverse IDs"
+        
         let filterButton: UIBarButtonItem = UIBarButtonItem(title: "", style: UIBarButtonItem.Style.plain, target: self, action: #selector(filterClicked(_:)))
         filterButton.setBackgroundImage(UIImage(named: "filterIcon"), for: .normal, barMetrics: .default)
         self.navigationItem.rightBarButtonItem = filterButton
@@ -78,7 +94,7 @@ class CharactersCollectionViewController: UIViewController {
         }
     }
     
-    @objc func filterClicked(_ sender: Any){
+    @objc func filterClicked(_ sender: Any) {
         self.characterFilterBackdrop = CharacterFilterBackdrop()
         self.characterFilterBackdrop?.addCharacterFilterBackdrop(viewMain: self.view, filters: self.filters, delegate: self)
         characterFilterBackdrop?.containerView.contentView.frame = CGRect(x: characterFilterBackdrop?.containerView.contentView.frame.minX ?? 0,
@@ -131,14 +147,14 @@ extension CharactersCollectionViewController: CharactersCollectionViewProtocol {
 extension CharactersCollectionViewController: CharactersCollectionViewDelegate {
     func loadNextPage() {
         if self.filters != nil {
-            self.presenter.loadFilterCharacters()
+            self.presenter?.loadFilterCharacters()
         } else {
-            self.presenter.loadCharacters()
+            self.presenter?.loadCharacters()
         }
     }
     
     func loadImage(from url: URL, completion: @escaping (UIImage?) -> Void) {
-        self.presenter.downloadImage(from: url) { image in
+        self.presenter?.downloadImage(from: url) { image in
             completion(image)
         }
     }
@@ -148,8 +164,8 @@ extension CharactersCollectionViewController: CharactersCollectionViewDelegate {
 extension CharactersCollectionViewController: CharacterFilterBackdropDelegate {
     func searchCharacters(filters: CharacterFilterParams) {
         self.charactersViews?.selectedIndexPath = nil
-        self.presenter.resetFilters(filters: filters)
-        self.presenter.loadFilterCharacters()
+        self.presenter?.resetFilters(filters: filters)
+        self.presenter?.loadFilterCharacters()
         self.characterFilterBackdrop?.removeFromSuperview()
     }
     
