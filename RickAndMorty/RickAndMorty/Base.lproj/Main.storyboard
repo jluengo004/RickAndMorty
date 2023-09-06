@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="UcJ-fU-XdP">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="x6h-VU-yoF">
+            <objects>
+                <navigationController id="UcJ-fU-XdP" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="mET-40-ovd">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="eEs-Iv-UNp"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x7G-BZ-HRN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-782" y="-2"/>
+        </scene>
+        <!--Characters Collection View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="CharactersCollectionViewController" customModule="RickAndMorty" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O10-xh-wXV">
+                                <rect key="frame" x="173" y="103" width="47" height="17"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4yy-X8-zdT">
+                                        <rect key="frame" x="0.0" y="0.6666666666666714" width="31" height="16"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="16" id="G3a-uG-DBn"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uf0-EL-SQX">
+                                        <rect key="frame" x="31" y="1" width="15" height="15"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="15" id="8Om-v9-9BU"/>
+                                            <constraint firstAttribute="height" constant="15" id="c95-ro-sTX"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="dismissIcon"/>
+                                        <connections>
+                                            <action selector="dismissFiltersTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="EJg-fn-Ho9"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="uf0-EL-SQX" secondAttribute="trailing" constant="1" id="LHn-0G-M85"/>
+                                    <constraint firstAttribute="height" constant="17" id="Mks-wD-bGd"/>
+                                    <constraint firstItem="4yy-X8-zdT" firstAttribute="centerY" secondItem="O10-xh-wXV" secondAttribute="centerY" id="Vgb-yi-9Sp"/>
+                                    <constraint firstItem="uf0-EL-SQX" firstAttribute="centerY" secondItem="O10-xh-wXV" secondAttribute="centerY" id="aLm-gF-iI2"/>
+                                    <constraint firstItem="uf0-EL-SQX" firstAttribute="leading" secondItem="4yy-X8-zdT" secondAttribute="trailing" id="jse-Fp-BWn"/>
+                                    <constraint firstItem="4yy-X8-zdT" firstAttribute="leading" secondItem="O10-xh-wXV" secondAttribute="leading" id="zb9-Hs-FPs"/>
+                                </constraints>
+                            </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ABN-90-yrc">
+                                <rect key="frame" x="0.0" y="135" width="393" height="683"/>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ABN-90-yrc" secondAttribute="trailing" id="J0B-xX-QFq"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="ABN-90-yrc" secondAttribute="bottom" id="Rnf-Rv-t0U"/>
+                            <constraint firstItem="O10-xh-wXV" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Ufs-2c-T39"/>
+                            <constraint firstItem="ABN-90-yrc" firstAttribute="top" secondItem="O10-xh-wXV" secondAttribute="bottom" constant="15" id="hto-U4-rj5"/>
+                            <constraint firstItem="O10-xh-wXV" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="n9f-bn-Zjl"/>
+                            <constraint firstItem="ABN-90-yrc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="tRl-9v-wXE"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="xXd-S3-fGU"/>
+                    <connections>
+                        <outlet property="dismissFilterButton" destination="uf0-EL-SQX" id="108-1z-T9X"/>
+                        <outlet property="filterLabel" destination="4yy-X8-zdT" id="hox-1Q-UuP"/>
+                        <outlet property="filterView" destination="O10-xh-wXV" id="ldx-6J-o5b"/>
+                        <outlet property="stackView" destination="ABN-90-yrc" id="gLd-Wg-d1h"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="138.1679389312977" y="-2.1126760563380285"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="dismissIcon" width="15" height="15"/>
+        <systemColor name="systemGroupedBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
