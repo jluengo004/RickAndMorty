@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="UcJ-fU-XdP">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="x6h-VU-yoF">
+            <objects>
+                <navigationController id="UcJ-fU-XdP" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="mET-40-ovd">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Sj3-Nj-tW1" kind="relationship" relationship="rootViewController" id="bIm-zx-Zdg"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x7G-BZ-HRN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-782" y="-2"/>
+        </scene>
+        <!--Home View Controller-->
+        <scene sceneID="sJX-CE-QPS">
+            <objects>
+                <viewController id="Sj3-Nj-tW1" customClass="HomeViewController" customModule="RickAndMorty" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="141-eI-XQL">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wallpaper1" translatesAutoresizingMaskIntoConstraints="NO" id="EYF-Xa-AjE">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7b4-Fp-pl6">
+                                <rect key="frame" x="114" y="496" width="165" height="34.333333333333329"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                <connections>
+                                    <action selector="wikiButtonTapped:" destination="Sj3-Nj-tW1" eventType="touchUpInside" id="oVZ-Ja-Pst"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M7W-gU-21z">
+                                <rect key="frame" x="167" y="333" width="59" height="34.333333333333314"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Quiz"/>
+                                <connections>
+                                    <action selector="quizButtonTapped:" destination="Sj3-Nj-tW1" eventType="touchUpInside" id="qtf-PW-wMz"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="5D1-5u-bgy"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="EYF-Xa-AjE" firstAttribute="top" secondItem="141-eI-XQL" secondAttribute="top" id="1dh-09-aNt"/>
+                            <constraint firstItem="M7W-gU-21z" firstAttribute="centerX" secondItem="5D1-5u-bgy" secondAttribute="centerX" id="IQB-uN-lcR"/>
+                            <constraint firstAttribute="trailing" secondItem="EYF-Xa-AjE" secondAttribute="trailing" id="RIG-Vl-AD4"/>
+                            <constraint firstItem="M7W-gU-21z" firstAttribute="top" secondItem="5D1-5u-bgy" secondAttribute="top" constant="230" id="c53-pm-21p"/>
+                            <constraint firstItem="EYF-Xa-AjE" firstAttribute="leading" secondItem="141-eI-XQL" secondAttribute="leading" id="tj4-T6-shH"/>
+                            <constraint firstAttribute="bottom" secondItem="EYF-Xa-AjE" secondAttribute="bottom" id="xTl-RS-Y1D"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Iyl-r2-229"/>
+                    <connections>
+                        <outlet property="quizButton" destination="M7W-gU-21z" id="py7-iY-jiV"/>
+                        <outlet property="wallpaperImageView" destination="EYF-Xa-AjE" id="RZF-qJ-Y3H"/>
+                        <outlet property="wikiButton" destination="7b4-Fp-pl6" id="I50-WP-Paw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LMU-qI-SCN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-66.412213740458014" y="-2.1126760563380285"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="wallpaper1" width="640" height="1136"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

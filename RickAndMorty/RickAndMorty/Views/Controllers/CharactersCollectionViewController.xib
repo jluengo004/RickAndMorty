@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CharactersCollectionViewController" customModule="RickAndMorty" customModuleProvider="target">
+            <connections>
+                <outlet property="dismissFilterButton" destination="ii5-wn-iS4" id="YUV-iO-eLP"/>
+                <outlet property="filterLabel" destination="kL7-G8-8pX" id="Yp7-qc-LVT"/>
+                <outlet property="filterView" destination="xDD-FG-i9E" id="HqY-59-Qi0"/>
+                <outlet property="stackView" destination="vgM-2A-lEi" id="C2S-GO-cET"/>
+                <outlet property="view" destination="pmA-De-VeO" id="VwJ-og-sVV"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="pmA-De-VeO">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xDD-FG-i9E">
+                    <rect key="frame" x="173" y="59" width="47" height="17"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kL7-G8-8pX">
+                            <rect key="frame" x="0.0" y="0.6666666666666643" width="31" height="16"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="16" id="Jah-Wp-cGJ"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ii5-wn-iS4">
+                            <rect key="frame" x="31" y="1" width="15" height="15"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="15" id="Wcp-3e-tNK"/>
+                                <constraint firstAttribute="height" constant="15" id="abT-Xp-AOg"/>
+                            </constraints>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" image="dismissIcon"/>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="kL7-G8-8pX" firstAttribute="centerY" secondItem="xDD-FG-i9E" secondAttribute="centerY" id="1cj-LE-CQj"/>
+                        <constraint firstAttribute="trailing" secondItem="ii5-wn-iS4" secondAttribute="trailing" constant="1" id="Uxh-l6-DIh"/>
+                        <constraint firstItem="ii5-wn-iS4" firstAttribute="leading" secondItem="kL7-G8-8pX" secondAttribute="trailing" id="li3-4D-h7y"/>
+                        <constraint firstItem="ii5-wn-iS4" firstAttribute="centerY" secondItem="xDD-FG-i9E" secondAttribute="centerY" id="mVe-Be-3IV"/>
+                        <constraint firstItem="kL7-G8-8pX" firstAttribute="leading" secondItem="xDD-FG-i9E" secondAttribute="leading" id="q1B-3G-9eN"/>
+                        <constraint firstAttribute="height" constant="17" id="sqG-nP-fvH"/>
+                    </constraints>
+                </view>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="vgM-2A-lEi">
+                    <rect key="frame" x="0.0" y="91" width="393" height="727"/>
+                </stackView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="ZC1-hz-iLy"/>
+            <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="vgM-2A-lEi" firstAttribute="leading" secondItem="ZC1-hz-iLy" secondAttribute="leading" id="81I-om-Coa"/>
+                <constraint firstItem="xDD-FG-i9E" firstAttribute="centerX" secondItem="ZC1-hz-iLy" secondAttribute="centerX" id="AeO-NE-B45"/>
+                <constraint firstItem="ZC1-hz-iLy" firstAttribute="bottom" secondItem="vgM-2A-lEi" secondAttribute="bottom" id="CAP-xM-J7X"/>
+                <constraint firstItem="xDD-FG-i9E" firstAttribute="top" secondItem="ZC1-hz-iLy" secondAttribute="top" id="YpS-KU-ThR"/>
+                <constraint firstItem="ZC1-hz-iLy" firstAttribute="trailing" secondItem="vgM-2A-lEi" secondAttribute="trailing" id="jWI-l7-5Sc"/>
+                <constraint firstItem="vgM-2A-lEi" firstAttribute="top" secondItem="xDD-FG-i9E" secondAttribute="bottom" constant="15" id="kzc-ij-KqL"/>
+            </constraints>
+            <point key="canvasLocation" x="-279" y="-22"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="dismissIcon" width="15" height="15"/>
+        <systemColor name="systemGroupedBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
