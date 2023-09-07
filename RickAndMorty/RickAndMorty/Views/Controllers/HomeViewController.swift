@@ -84,7 +84,8 @@ class HomeViewController: UIViewController {
             self.navigationController?.pushViewController(wikiVC, animated: true)
             
         default:
-            break
+            let wikiVC = CharactersCollectionViewController.create()
+            self.navigationController?.pushViewController(wikiVC, animated: true)
         }
             
     }

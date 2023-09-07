@@ -94,7 +94,7 @@ class QuizPresenter {
     }
     
     func downloadImage(from url: URL, completion: @escaping (UIImage?) -> Void) {
-        ImageLoadingAndCaching().downloadImage(from: url) { image in
+        ImageLoadingAndCaching().getImage(from: url) { image in
             completion(image)
         }
     }

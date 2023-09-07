@@ -23,10 +23,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xDD-FG-i9E">
-                    <rect key="frame" x="173" y="59" width="47" height="17"/>
+                    <rect key="frame" x="173" y="0.0" width="47" height="17"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kL7-G8-8pX">
-                            <rect key="frame" x="0.0" y="0.6666666666666643" width="31" height="16"/>
+                            <rect key="frame" x="0.0" y="0.66666666666666607" width="31" height="15.999999999999998"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="16" id="Jah-Wp-cGJ"/>
                             </constraints>
@@ -42,6 +42,9 @@
                             </constraints>
                             <state key="normal" title="Button"/>
                             <buttonConfiguration key="configuration" style="plain" image="dismissIcon"/>
+                            <connections>
+                                <action selector="dismissFiltersTapped:" destination="-1" eventType="touchUpInside" id="FVP-zD-Svc"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -55,7 +58,7 @@
                     </constraints>
                 </view>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="vgM-2A-lEi">
-                    <rect key="frame" x="0.0" y="91" width="393" height="727"/>
+                    <rect key="frame" x="0.0" y="32" width="393" height="820"/>
                 </stackView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="ZC1-hz-iLy"/>
