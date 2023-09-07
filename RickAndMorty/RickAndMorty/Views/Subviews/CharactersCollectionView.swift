@@ -42,6 +42,12 @@ class CharactersCollectionView: UIView  {
         self.charactersCollectionView.reloadData()
         isPageRefreshing = false
     }
+    
+    func reloadCorrect(characters: [Character], position: Int) {
+        self.characters = characters
+        self.charactersCollectionView.reloadItems(at: [IndexPath(row: position, section: 0)])
+        isPageRefreshing = false
+    }
 }
 
 extension CharactersCollectionView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
