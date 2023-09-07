@@ -13,6 +13,14 @@
 		4D3B5C702AA883700018B0AD /* CharacterNameTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D3B5C6E2AA883700018B0AD /* CharacterNameTableViewCell.xib */; };
 		4D3B5C722AA8A5010018B0AD /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3B5C712AA8A5010018B0AD /* HomeViewController.swift */; };
 		4D3B5C732AA8A5010018B0AD /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3B5C712AA8A5010018B0AD /* HomeViewController.swift */; };
+		4D3B5C822AA9A9CA0018B0AD /* CharacterCollectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3B5C812AA9A9CA0018B0AD /* CharacterCollectionTests.swift */; };
+		4D3B5C832AA9ADB90018B0AD /* CharacterCollecionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE0A5E42AA4F3DF0067317F /* CharacterCollecionViewCell.swift */; };
+		4D3B5C872AA9D0720018B0AD /* CharactersMockup.json in Resources */ = {isa = PBXBuildFile; fileRef = 4D3B5C862AA9D0720018B0AD /* CharactersMockup.json */; };
+		4D3B5C8C2AA9D15F0018B0AD /* JSONHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3B5C8B2AA9D15F0018B0AD /* JSONHelper.swift */; };
+		4D3B5C8E2AA9DA8F0018B0AD /* CharactersFilterMockup.json in Resources */ = {isa = PBXBuildFile; fileRef = 4D3B5C8D2AA9DA8F0018B0AD /* CharactersFilterMockup.json */; };
+		4D3B5C902AA9DB6C0018B0AD /* QuizTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3B5C8F2AA9DB6C0018B0AD /* QuizTests.swift */; };
+		4D3B5C922AA9DBE50018B0AD /* EpisodesMockup.json in Resources */ = {isa = PBXBuildFile; fileRef = 4D3B5C912AA9DBE50018B0AD /* EpisodesMockup.json */; };
+		4D3B5C942AA9E9660018B0AD /* BaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3B5C932AA9E9660018B0AD /* BaseTest.swift */; };
 		4DCBAE2D2AA4FB2A004A0F69 /* CharactersCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCBAE2C2AA4FB2A004A0F69 /* CharactersCollectionView.swift */; };
 		4DCBAE2E2AA4FB2A004A0F69 /* CharactersCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCBAE2C2AA4FB2A004A0F69 /* CharactersCollectionView.swift */; };
 		4DCBAE302AA4FB34004A0F69 /* CharactersCollectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4DCBAE2F2AA4FB34004A0F69 /* CharactersCollectionView.xib */; };
@@ -107,6 +115,13 @@
 		4D3B5C6B2AA883690018B0AD /* CharacterNameTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterNameTableViewCell.swift; sourceTree = "<group>"; };
 		4D3B5C6E2AA883700018B0AD /* CharacterNameTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CharacterNameTableViewCell.xib; sourceTree = "<group>"; };
 		4D3B5C712AA8A5010018B0AD /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		4D3B5C812AA9A9CA0018B0AD /* CharacterCollectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterCollectionTests.swift; sourceTree = "<group>"; };
+		4D3B5C862AA9D0720018B0AD /* CharactersMockup.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CharactersMockup.json; sourceTree = "<group>"; };
+		4D3B5C8B2AA9D15F0018B0AD /* JSONHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONHelper.swift; sourceTree = "<group>"; };
+		4D3B5C8D2AA9DA8F0018B0AD /* CharactersFilterMockup.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CharactersFilterMockup.json; sourceTree = "<group>"; };
+		4D3B5C8F2AA9DB6C0018B0AD /* QuizTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizTests.swift; sourceTree = "<group>"; };
+		4D3B5C912AA9DBE50018B0AD /* EpisodesMockup.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = EpisodesMockup.json; sourceTree = "<group>"; };
+		4D3B5C932AA9E9660018B0AD /* BaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTest.swift; sourceTree = "<group>"; };
 		4DCBAE2C2AA4FB2A004A0F69 /* CharactersCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersCollectionView.swift; sourceTree = "<group>"; };
 		4DCBAE2F2AA4FB34004A0F69 /* CharactersCollectionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CharactersCollectionView.xib; sourceTree = "<group>"; };
 		4DCBAE322AA5F5A8004A0F69 /* CharacterFilterBackdrop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterFilterBackdrop.swift; sourceTree = "<group>"; };
@@ -213,6 +228,25 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		4D3B5C882AA9D08D0018B0AD /* Mockups */ = {
+			isa = PBXGroup;
+			children = (
+				4D3B5C862AA9D0720018B0AD /* CharactersMockup.json */,
+				4D3B5C8D2AA9DA8F0018B0AD /* CharactersFilterMockup.json */,
+				4D3B5C912AA9DBE50018B0AD /* EpisodesMockup.json */,
+			);
+			path = Mockups;
+			sourceTree = "<group>";
+		};
+		4D3B5C8A2AA9D1500018B0AD /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				4D3B5C8B2AA9D15F0018B0AD /* JSONHelper.swift */,
+				4D3B5C932AA9E9660018B0AD /* BaseTest.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
 		4DE0A5722AA49B4D0067317F = {
 			isa = PBXGroup;
 			children = (
@@ -254,7 +288,11 @@
 		4DE0A5942AA49B4F0067317F /* RickAndMortyTests */ = {
 			isa = PBXGroup;
 			children = (
+				4D3B5C8A2AA9D1500018B0AD /* Helper */,
+				4D3B5C882AA9D08D0018B0AD /* Mockups */,
 				4DE0A5952AA49B4F0067317F /* RickAndMortyTests.swift */,
+				4D3B5C812AA9A9CA0018B0AD /* CharacterCollectionTests.swift */,
+				4D3B5C8F2AA9DB6C0018B0AD /* QuizTests.swift */,
 			);
 			path = RickAndMortyTests;
 			sourceTree = "<group>";
@@ -488,8 +526,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D3B5C8E2AA9DA8F0018B0AD /* CharactersFilterMockup.json in Resources */,
 				4DFCDEB02AA853D400EC588A /* QuizViewController.xib in Resources */,
+				4D3B5C872AA9D0720018B0AD /* CharactersMockup.json in Resources */,
 				4DCBAE312AA4FB34004A0F69 /* CharactersCollectionView.xib in Resources */,
+				4D3B5C922AA9DBE50018B0AD /* EpisodesMockup.json in Resources */,
 				4D3B5C702AA883700018B0AD /* CharacterNameTableViewCell.xib in Resources */,
 				4DFCDE8F2AA7385A00EC588A /* CharacterPortraitCollectionViewCell.xib in Resources */,
 				4DCBAE372AA5F5BA004A0F69 /* CharacterFilterBackdrop.xib in Resources */,
@@ -659,11 +700,16 @@
 				4DFCDE922AA7907F00EC588A /* RealmManager.swift in Sources */,
 				4DFCDE882AA72E1100EC588A /* UIViewControllerExtension.swift in Sources */,
 				4DFCDEA42AA7ADCB00EC588A /* EpisodeService.swift in Sources */,
+				4D3B5C832AA9ADB90018B0AD /* CharacterCollecionViewCell.swift in Sources */,
 				4DE0A5C72AA4AFDA0067317F /* CharacterService.swift in Sources */,
 				4D3B5C732AA8A5010018B0AD /* HomeViewController.swift in Sources */,
+				4D3B5C942AA9E9660018B0AD /* BaseTest.swift in Sources */,
 				4DE0A5D02AA4E17C0067317F /* CharactersCollectionViewController.swift in Sources */,
+				4D3B5C822AA9A9CA0018B0AD /* CharacterCollectionTests.swift in Sources */,
 				4DFCDEA12AA7AC3800EC588A /* HTMLParser.swift in Sources */,
 				4DCBAE2E2AA4FB2A004A0F69 /* CharactersCollectionView.swift in Sources */,
+				4D3B5C8C2AA9D15F0018B0AD /* JSONHelper.swift in Sources */,
+				4D3B5C902AA9DB6C0018B0AD /* QuizTests.swift in Sources */,
 				4DFCDE852AA64DA700EC588A /* FilterButton.swift in Sources */,
 				4DE0A5DF2AA4EED60067317F /* CharactersCollectionPresenter.swift in Sources */,
 				4DFCDE9E2AA797A400EC588A /* RealmObject.swift in Sources */,

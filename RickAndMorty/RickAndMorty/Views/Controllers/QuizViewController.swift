@@ -179,8 +179,8 @@ extension QuizViewController: QuizViewProtocol {
         
         if let index = self.unsolvedCharacters?.indices.filter({ unsolvedCharacters?[$0].id == 9999 }).first {
             self.unsolvedCharacters?[index] = character
+            self.charactersViews?.reloadCorrect(characters: self.unsolvedCharacters ?? [], position: index)
         }
-        self.charactersViews?.reloadWith(characters: self.unsolvedCharacters ?? [])
     }
     
     func loadIncorrectGuess() {

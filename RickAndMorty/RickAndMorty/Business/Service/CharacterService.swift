@@ -139,7 +139,7 @@ public class CharacterService {
         }
     }
     
-    private func startCharacterPaginationNetworkCall(url: URL, completion: @escaping (RMResult<CharacterPagination, String>) -> Void) {
+    func startCharacterPaginationNetworkCall(url: URL, completion: @escaping (RMResult<CharacterPagination, String>) -> Void) {
         networkManager.httpGet(url: url) { result in
             switch result {
             case .success(let charactersData):

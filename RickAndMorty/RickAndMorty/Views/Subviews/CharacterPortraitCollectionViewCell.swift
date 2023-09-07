@@ -33,12 +33,16 @@ class CharacterPortraitCollectionViewCell: UICollectionViewCell {
             self.delegate?.loadImage(from: imageURL, completion: { image in
                 self.setImage(image: image)
             })
+        } else {
+            setImage(image: UIImage(named: "placeHolderRAM"))
         }
     }
     
     func setImage(image: UIImage?) {
         DispatchQueue.main.async() { [weak self] in
-            self?.imageView.image = image
+            if self?.character?.image != nil {
+                self?.imageView.image = image
+            }
         }
     }
     
