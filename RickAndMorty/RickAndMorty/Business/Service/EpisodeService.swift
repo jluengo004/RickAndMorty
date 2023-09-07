@@ -36,7 +36,7 @@ public class EpisodeService {
         }
     }
     
-    private func startEpisodePaginationNetworkCall(url: URL, completion: @escaping (RMResult<EpisodePagination, String>) -> Void) {
+    func startEpisodePaginationNetworkCall(url: URL, completion: @escaping (RMResult<EpisodePagination, String>) -> Void) {
         networkManager.httpGet(url: url) { result in
             switch result {
             case .success(let episodesData):

@@ -10,13 +10,13 @@ import UIKit
 
 class QuizPresenter {
     private var quizVCProtocol: QuizViewProtocol?
-    private let episodeService = EpisodeService()
-    private let characterService = CharacterService()
+    var episodeService = EpisodeService()
+    var characterService = CharacterService()
     private var characterPageCount = 1
     private var episodePageCount = 1
-    private var characters: [Character] = []
-    private var episodes: [Episode] = []
-    private var quizEpisode: Episode?
+    var characters: [Character] = []
+    var episodes: [Episode] = []
+    var quizEpisode: Episode?
     private let imageCache = NSCache<AnyObject, AnyObject>()
     private let baseCustomEpisodeURL = "https://rickandmorty.fandom.com/wiki/"
     

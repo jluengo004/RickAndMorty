@@ -13,9 +13,10 @@ class CharactersCollectionPresenter {
     private var isCharacterLastPage = false
     private var filteredCharacterPageCount = 1
     private var isFilteredCharacterLastPage = false
-    private var characters: [Character] = []
-    private var filteredCharacters: [Character] = []
-    private var filters: CharacterFilterParams?
+    var characters: [Character] = []
+    var filteredCharacters: [Character] = []
+    var filters: CharacterFilterParams?
+    var characterService = CharacterService()
     weak var charactersCollectionVCProtocol: CharactersCollectionViewProtocol?
     
     func setCharacterViewProtocol(viewProtocol: CharactersCollectionViewProtocol) {
@@ -24,8 +25,7 @@ class CharactersCollectionPresenter {
     
     func loadCharacters() {
         if !isCharacterLastPage {
-            let service = CharacterService()
-            service.getCharacterPage(page: characterPageCount) { result in
+            characterService.getCharacterPage(page: characterPageCount) { result in
                 switch result {
                 case .success(let charactersPagination):
                     self.characters.append(contentsOf: charactersPagination.results)
@@ -45,9 +45,8 @@ class CharactersCollectionPresenter {
     
     func loadFilterCharacters() {
         if !isFilteredCharacterLastPage {
-            let service = CharacterService()
             guard let filters = self.filters else { return }
-            service.getFilteredCharacters(params: filters, page: filteredCharacterPageCount) { result in
+            characterService.getFilteredCharacters(params: filters, page: filteredCharacterPageCount) { result in
                 switch result {
                 case .success(let filteredCharactersPagination):
                     self.filteredCharacters.append(contentsOf: filteredCharactersPagination.results)
