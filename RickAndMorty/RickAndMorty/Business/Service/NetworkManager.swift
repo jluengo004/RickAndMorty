@@ -7,28 +7,43 @@
 
 import Foundation
 
-public enum RMResult<Response, ErrorModel>{
-    case success(Response)
-    case failure(ErrorModel)
+public enum ServiceErrors: Error, LocalizedError {
+    case networkError(String, Int?), emptyResponse, urlError, paramError, decodingError(String)
+    
+    public var errorDescription: String? {
+        switch self {
+        case .networkError(let description, let code):
+            return "Network error: \(description) with code \(code ?? 400)"
+        case .emptyResponse:
+            return "No model retrieved from response"
+        case .urlError:
+            return "Incorrect URL"
+        case .paramError:
+            return "Incorrect parameters"
+        case .decodingError(let modelName):
+            return "Unable to decode servide response into \(modelName)"
+        }
+    }
 }
 
 public class NetworkManager {
-    public func httpGet(url: URL, completion: @escaping (RMResult<Data, String>) -> Void) {
+    public func httpGet(url: URL, completion: @escaping (Result<Data, ServiceErrors>) -> Void) {
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         let cache = RealmManager()
         cache.fetchAllObjects()
         if let dataCache = fetchFromCache(url: url.absoluteString) {
-            completion(RMResult.success(dataCache))
+            completion(.success(dataCache))
         } else {
             let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
                 if let error = error {
-                    completion(RMResult.failure(error.localizedDescription))
+                    let code = (response as? HTTPURLResponse)?.statusCode
+                    completion(.failure(.networkError(error.localizedDescription, code)))
                 }
                 
                 if let data = data {
                     self.saveInCache(url: url.absoluteString, data: data)
-                    completion(RMResult.success(data))
+                    completion(.success(data))
                 }
             }
             task.resume()

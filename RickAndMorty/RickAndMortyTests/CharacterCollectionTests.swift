@@ -12,7 +12,7 @@ import XCTest
 class CharacterCollectionViewProtocol: CharactersCollectionViewProtocol {
     var loadedCharacters = false
     var toastCalled = false
-
+    
     func loadCharactersCollection(characters: [Character], filters: CharacterFilterParams?) { loadedCharacters = true }
     func emptyFilterCharacters() { toastCalled = true }
 }
@@ -34,7 +34,7 @@ final class CharacterCollectionTests: BaseTest {
         charactersView = nil
         try super.tearDownWithError()
     }
-
+    
     func test_loadCharactersSuccess() throws {
         presenter.characterService = CharacterServiceSuccessMock()
         XCTAssert(presenter.characters.count == 0)
@@ -71,44 +71,36 @@ final class CharacterCollectionTests: BaseTest {
         XCTAssert(presenter.filteredCharacters.count == 0)
         XCTAssertTrue(charactersView.toastCalled)
     }
-
+    
 }
 
 // MARK: Services Mock's
 class CharacterServiceSuccessMock: CharacterService {
-    override func startCharacterPaginationNetworkCall(url: URL, completion: @escaping (RMResult<CharacterPagination, String>) -> Void) {
+    override func startCharacterPaginationNetworkCall(url: URL, completion: @escaping (Result<CharacterPagination, ServiceErrors>) -> Void) {
         let jsonData = (try? JSONHelper().getData(bundle: Bundle(for: type(of: self)), for: "CharactersMockup")) ?? Data()
         let characterPagination: CharacterPagination? =  try? JSONDecoder().decode(CharacterPagination.self, from: jsonData)
         if let characterPagination = characterPagination {
-            let serviceResult = RMResult<CharacterPagination, String>.success(characterPagination)
-            completion(serviceResult)
+            completion(.success(characterPagination))
         } else {
-            let error = "No characters found"
-            let serviceResult = RMResult<CharacterPagination, String>.failure(error)
-            completion(serviceResult)
+            completion(.failure(.emptyResponse))
         }
     }
 }
 
 class FilterCharacterServiceSuccessMock: CharacterService {
-    override func startCharacterPaginationNetworkCall(url: URL, completion: @escaping (RMResult<CharacterPagination, String>) -> Void) {
+    override func startCharacterPaginationNetworkCall(url: URL, completion: @escaping (Result<CharacterPagination, ServiceErrors>) -> Void) {
         let jsonData = (try? JSONHelper().getData(bundle: Bundle(for: type(of: self)), for: "CharactersFilterMockup")) ?? Data()
         let characterPagination: CharacterPagination? =  try? JSONDecoder().decode(CharacterPagination.self, from: jsonData)
         if let characterPagination = characterPagination {
-            let serviceResult = RMResult<CharacterPagination, String>.success(characterPagination)
-            completion(serviceResult)
+            completion(.success(characterPagination))
         } else {
-            let error = "No characters found"
-            let serviceResult = RMResult<CharacterPagination, String>.failure(error)
-            completion(serviceResult)
+            completion(.failure(.emptyResponse))
         }
     }
 }
 
 class CharacterServiceFailureMock: CharacterService {
-    override func startCharacterPaginationNetworkCall(url: URL, completion: @escaping (RMResult<CharacterPagination, String>) -> Void) {
-        let error = "No characters found"
-        let serviceResult = RMResult<CharacterPagination, String>.failure(error)
-        completion(serviceResult)
+    override func startCharacterPaginationNetworkCall(url: URL, completion: @escaping (Result<CharacterPagination, ServiceErrors>) -> Void) {
+        completion(.failure(.emptyResponse))
     }
 }

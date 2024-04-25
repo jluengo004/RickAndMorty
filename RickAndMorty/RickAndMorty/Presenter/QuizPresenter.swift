@@ -35,7 +35,7 @@ class QuizPresenter {
     
     func selectAndLoadEpisode(completion: @escaping (Episode?) -> Void) {
         var episode = episodes[Int.random(in: 0...(episodes.count - 1))]
-        let episodeNameAsURL = episode.name.replacingOccurrences(of: " ", with: "_")
+        let episodeNameAsURL = episode.name.replacingOccurrences(of: " ", with: "_").replacingOccurrences(of: ",", with: "")
         let episodeCustomURL = URL(string: baseCustomEpisodeURL + episodeNameAsURL)
         guard let episodeCustomURL = episodeCustomURL else { return }
         episodeService.getEpisodeCustomData(url: episodeCustomURL) { result in

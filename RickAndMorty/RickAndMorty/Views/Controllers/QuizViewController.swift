@@ -68,7 +68,6 @@ class QuizViewController: UIViewController {
     func loadAndConfigureView() {
         self.allCharacters = self.presenter?.getCharacters()
         self.filteredCharacters = allCharacters
-        self.nameTextField.delegate = self
         self.presenter?.selectAndLoadEpisode { episode in
             self.episode = episode
             self.configureView()
@@ -167,6 +166,7 @@ extension QuizViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension QuizViewController: QuizViewProtocol {
     func loadQuizView() {
+        self.nameTextField.delegate = self
         self.loadAndConfigureView()
     }
     

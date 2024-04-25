@@ -9,7 +9,7 @@ import Foundation
 
 final class HTTMLParser {
     
-    func parse(html: String) -> (String?, String?) {
+    func parse(html: String) -> Result<(String?, String?), ServiceErrors> {
         do {
             let document: Document = try SwiftSoup.parse(html)
             
@@ -21,10 +21,9 @@ final class HTTMLParser {
             let synopsisClass = html.components(separatedBy: "<p>")[2]
             let synopsis = synopsisClass.components(separatedBy: "</p>").first
             
-            return (imageString,synopsis)
+            return .success((imageString,synopsis))
         } catch {
-            print("Error parsing: " + String(describing: error))
-            return (nil,nil)
+            return .failure(.decodingError("HTTMLParser"))
         }
     }
     

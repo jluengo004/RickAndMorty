@@ -117,9 +117,9 @@ public class CharacterService {
     private let baseURL = "https://rickandmortyapi.com/api/character/"
     private let networkManager = NetworkManager()
     
-    public func getCharacterPage(page: Int, completion: @escaping (RMResult<CharacterPagination, String>) -> Void) {
+    public func getCharacterPage(page: Int, completion: @escaping (Result<CharacterPagination, ServiceErrors>) -> Void) {
         guard let url = URL(string: baseURL + "?page=\(page)") else {
-            completion(RMResult.failure("url error"))
+            completion(.failure(.urlError))
             return
         }
         startCharacterPaginationNetworkCall(url: url) { result in
@@ -127,11 +127,11 @@ public class CharacterService {
         }
     }
     
-    public func getFilteredCharacters(params: CharacterFilterParams, page: Int, completion: @escaping (RMResult<CharacterPagination, String>) -> Void) {
+    public func getFilteredCharacters(params: CharacterFilterParams, page: Int, completion: @escaping (Result<CharacterPagination, ServiceErrors>) -> Void) {
         var urlComps = URLComponents(string: baseURL)
         urlComps?.queryItems = params.getQueryFilterParams(page: page)
         guard let url = urlComps?.url else {
-            completion(RMResult.failure("param error"))
+            completion(.failure(.paramError))
             return
         }
         startCharacterPaginationNetworkCall(url: url) { result in
@@ -139,21 +139,18 @@ public class CharacterService {
         }
     }
     
-    func startCharacterPaginationNetworkCall(url: URL, completion: @escaping (RMResult<CharacterPagination, String>) -> Void) {
+    func startCharacterPaginationNetworkCall(url: URL, completion: @escaping (Result<CharacterPagination, ServiceErrors>) -> Void) {
         networkManager.httpGet(url: url) { result in
             switch result {
             case .success(let charactersData):
                 if let characters = try? JSONDecoder().decode(CharacterPagination.self, from: charactersData) {
-                    let charactersResult = RMResult<CharacterPagination, String>.success(characters)
-                    completion(charactersResult)
+                    completion(.success(characters))
                 } else {
-                    let codingError = RMResult<CharacterPagination, String>.failure("coding error")
-                    completion(codingError)
+                    completion(.failure(.decodingError("CharacterPagination")))
                 }
                 
             case .failure(let error):
-                let codingError = RMResult<CharacterPagination, String>.failure(error)
-                completion(codingError)
+                completion(.failure(error))
             }
         }
     }

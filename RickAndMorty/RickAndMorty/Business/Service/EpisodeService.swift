@@ -12,23 +12,28 @@ public class EpisodeService {
     private let baseURL = "https://rickandmortyapi.com/api/episode/"
     private let networkManager = NetworkManager()
     
-    public func getEpisodeCustomData(url: URL, completion: @escaping (RMResult<(String?, String?), String>) -> Void) {
+    public func getEpisodeCustomData(url: URL, completion: @escaping (Result<(String?, String?), ServiceErrors>) -> Void) {
         networkManager.httpGet(url: url) { result in
             switch result {
             case .success(let htmlData):
                 let html = String(decoding: htmlData, as: UTF8.self)
                 let parsingResult = HTTMLParser().parse(html: html)
-                completion(RMResult.success(parsingResult))
+                switch parsingResult {
+                case .success(let episodeData):
+                    completion(.success(episodeData))
+                case .failure(let serviceError):
+                    completion(.failure(serviceError))
+                }
                 
             case .failure(let error):
-                print(error)
+                completion(.failure(error))
             }
         }
     }
     
-    public func getEpisodePage(page: Int, completion: @escaping (RMResult<EpisodePagination, String>) -> Void) {
+    public func getEpisodePage(page: Int, completion: @escaping (Result<EpisodePagination, ServiceErrors>) -> Void) {
         guard let url = URL(string: baseURL + "?page=\(page)") else {
-            completion(RMResult.failure("url error"))
+            completion(.failure(.urlError))
             return
         }
         startEpisodePaginationNetworkCall(url: url) { result in
@@ -36,21 +41,18 @@ public class EpisodeService {
         }
     }
     
-    func startEpisodePaginationNetworkCall(url: URL, completion: @escaping (RMResult<EpisodePagination, String>) -> Void) {
+    func startEpisodePaginationNetworkCall(url: URL, completion: @escaping (Result<EpisodePagination, ServiceErrors>) -> Void) {
         networkManager.httpGet(url: url) { result in
             switch result {
             case .success(let episodesData):
                 if let episodes = try? JSONDecoder().decode(EpisodePagination.self, from: episodesData) {
-                    let episodesResult = RMResult<EpisodePagination, String>.success(episodes)
-                    completion(episodesResult)
+                    completion(.success(episodes))
                 } else {
-                    let codingError = RMResult<EpisodePagination, String>.failure("coding error")
-                    completion(codingError)
+                    completion(.failure(.decodingError("EpisodePagination")))
                 }
                 
             case .failure(let error):
-                let codingError = RMResult<EpisodePagination, String>.failure(error)
-                completion(codingError)
+                completion(.failure(error))
             }
         }
     }
