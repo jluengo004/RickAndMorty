@@ -18,8 +18,9 @@ final class HTTMLParser {
             let imageSplit = imageHTML.components(separatedBy: "<img src=").last
             let imageString = imageSplit?.components(separatedBy: "\"")[1]
             
-            let synopsisClass = html.components(separatedBy: "<p>")[2]
-            let synopsis = synopsisClass.components(separatedBy: "</p>").first
+            let paragraphs = html.components(separatedBy: "<p>").dropFirst().dropFirst()
+            let synopsis = paragraphs.compactMap { $0.components(separatedBy: "</p>").first }
+                                    .filter { !$0.contains("<") }.first
             
             return .success((imageString,synopsis))
         } catch {
