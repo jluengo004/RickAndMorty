@@ -124,14 +124,13 @@ extension CharactersCollectionView: UICollectionViewDelegate, UICollectionViewDa
 
 extension CharactersCollectionView: UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
-        if indexPaths.last?.row ?? 0 > characters.count - 4 {
-            if !isPageRefreshing {
-                isPageRefreshing = true
-                delegate?.loadNextPage()
-            }
+        if indexPaths.last?.row ?? 0 > characters.count - 8 && !isPageRefreshing {
+            isPageRefreshing = true
+            delegate?.loadNextPage()
         }
     }
 }
+
 
 extension CharactersCollectionView: CharacterCollecionViewCellDelegate {
     func loadImage(from url: URL, completion: @escaping (UIImage?) -> Void) {

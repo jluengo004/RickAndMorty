@@ -23,6 +23,7 @@ class QuizViewController: UIViewController {
     private var filteredCharacters: [Character]?
     private var unsolvedCharacters: [Character]?
 
+    @IBOutlet weak var topViewForGesture: UIView!
     @IBOutlet weak var episodeLabel: UILabel!
     @IBOutlet weak var episodeImageView: UIImageView!
     @IBOutlet weak var synopsisLabel: UILabel!
@@ -90,7 +91,7 @@ class QuizViewController: UIViewController {
             self?.nameTextField.layer.borderColor = UIColor.systemGray4.cgColor
             self?.downloadEpisodeImage()
             self?.episodeLabel.text = self?.episode?.name
-            self?.episodeLabel.font = UIFont.boldSystemFont(ofSize: 17.0)
+            self?.episodeLabel.font = UIFont.boldSystemFont(ofSize: 20.0)
             self?.synopsisLabel.text = self?.episode?.synopsis
             self?.guessLabel.text = "Guess the characters that appear in this episode"
             
@@ -126,7 +127,12 @@ class QuizViewController: UIViewController {
     }
     
     @objc func refreshClicked(_ sender: Any) {
+        self.nameTextField.resignFirstResponder()
         self.loadAndConfigureView()
+    }
+    
+    @IBAction func screenTapped(_ sender: UITapGestureRecognizer) {
+        self.nameTextField.resignFirstResponder()
     }
 }
 

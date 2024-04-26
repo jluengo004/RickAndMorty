@@ -34,7 +34,7 @@ class CharacterPortraitCollectionViewCell: UICollectionViewCell {
                 self.setImage(image: image)
             })
         } else {
-            setImage(image: UIImage(named: "placeHolderRAM"))
+            self.imageView.image = UIImage(named: "placeHolderRAM")
         }
     }
     
@@ -45,5 +45,4 @@ class CharacterPortraitCollectionViewCell: UICollectionViewCell {
             }
         }
     }
-    
 }
