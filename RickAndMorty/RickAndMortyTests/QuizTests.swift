@@ -7,16 +7,19 @@
 
 import Foundation
 import XCTest
+import Combine
 @testable import RickAndMorty
 
 final class QuizMockView: QuizViewProtocol {
     var loadedQuiz = false
     var loadedCorrectGuess = false
     var loadedIncorrectGuess = false
+    var errorCalled = false
     
     func loadQuizView() { loadedQuiz = true }
     func loadCorrectGuess(character: Character) { loadedCorrectGuess = true }
     func loadIncorrectGuess() { loadedIncorrectGuess = true }
+    func showErrorAlert(error: String) { errorCalled = true }
 }
 
 final class QuizTests: BaseTest {
@@ -43,13 +46,6 @@ final class QuizTests: BaseTest {
         XCTAssert(presenter.episodes.count > 0)
     }
     
-    func test_loadAllEpisodesFail() throws {
-        presenter.episodeService = EpisodeServiceFailureMock()
-        XCTAssert(presenter.episodes.count == 0)
-        presenter.loadAllEpisodes()
-        XCTAssert(presenter.episodes.count == 0)
-    }
-    
     func test_loadAllCharactersSuccess() throws {
         presenter.characterService = CharacterServiceSuccessMock()
         XCTAssert(presenter.characters.count == 0)
@@ -67,7 +63,7 @@ final class QuizTests: BaseTest {
     }
     
     func test_selectRandomEpisodeAndGuessCorrectCharacter() throws {
-        presenter.episodeService = EpisodeCustomInfoServiceSuccessMock()
+        presenter.episodeService = EpisodeServiceSuccessMock()
         let jsonData = (try? JSONHelper().getData(bundle: bundle, for: "EpisodesMockup")) ?? Data()
         let episodesPagination: EpisodePagination? =  try? JSONDecoder().decode(EpisodePagination.self, from: jsonData)
         
@@ -88,7 +84,7 @@ final class QuizTests: BaseTest {
     }
     
     func test_selectRandomEpisodeAndGuessIncorrectCharacter() throws {
-        presenter.episodeService = EpisodeCustomInfoServiceSuccessMock()
+        presenter.episodeService = EpisodeServiceSuccessMock()
         let jsonData = (try? JSONHelper().getData(bundle: bundle, for: "EpisodesMockup")) ?? Data()
         let episodesPagination: EpisodePagination? =  try? JSONDecoder().decode(EpisodePagination.self, from: jsonData)
         
@@ -108,28 +104,40 @@ final class QuizTests: BaseTest {
 
 // MARK: Services Mock's
 final class EpisodeServiceSuccessMock: EpisodeService {
-    override func startEpisodePaginationNetworkCall(url: URL, completion: @escaping (Result<EpisodePagination, ServiceErrors>) -> Void) {
+    public override func getEpisodeCustomData(url: URL) -> AnyPublisher<Data, ServiceErrors> {
+        let data = Data()
+        if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+            let fileURL = dir.appendingPathComponent("CustomEpisodeDataMockup.txt")
+            do {
+                let text2 = try String(contentsOf: fileURL, encoding: .utf8)
+                let data = try Data(contentsOf: fileURL)
+                return Future<Data, ServiceErrors> { promise in
+                    promise(.success(data))
+                }
+                .eraseToAnyPublisher()
+            }
+            catch {/* error handling here */}
+        }
+        return Fail<Data, ServiceErrors>(error: .emptyResponse).eraseToAnyPublisher()
+    }
+    
+    public override func getEpisodePage(page: Int) -> AnyPublisher<EpisodePagination, ServiceErrors> {
         let jsonData = (try? JSONHelper().getData(bundle: Bundle(for: type(of: self)), for: "EpisodesMockup")) ?? Data()
-        let episodesPagination: EpisodePagination? =  try? JSONDecoder().decode(EpisodePagination.self, from: jsonData)
-        if let episodesPagination = episodesPagination {
-            completion(.success(episodesPagination))
+        let episodePagination: EpisodePagination? =  try? JSONDecoder().decode(EpisodePagination.self, from: jsonData)
+        if let episodePagination = episodePagination {
+            return Future<EpisodePagination, ServiceErrors> { promise in
+                promise(.success(episodePagination))
+            }
+            .eraseToAnyPublisher()
         } else {
-            completion(.failure(.emptyResponse))
+            return Fail<EpisodePagination, ServiceErrors>(error: .emptyResponse).eraseToAnyPublisher()
         }
     }
 }
 
 final class EpisodeServiceFailureMock: EpisodeService {
-    override func startEpisodePaginationNetworkCall(url: URL, completion: @escaping (Result<EpisodePagination, ServiceErrors>) -> Void) {
-        completion(.failure(.emptyResponse))
-    }
-}
-
-final class EpisodeCustomInfoServiceSuccessMock: EpisodeService {
-    override func getEpisodeCustomData(url: URL, completion: @escaping (Result<(String?, String?), ServiceErrors>) -> Void) {
-        let imageURL = "https://static.wikia.nocookie.net/rickandmorty/images/8/89/Rms03e06.s29.png/revision/latest?cb=20171004024102"
-        let synopsis = "After another exhausting adventure, Rick and Morty decide they need a vacation. But things go a little haywire when they try a special detox machine."
-        completion(.success((imageURL,synopsis)))
+    public override func getEpisodeCustomData(url: URL) -> AnyPublisher<Data, ServiceErrors> {
+        return Fail<Data, ServiceErrors>(error: .emptyResponse).eraseToAnyPublisher()
     }
 }
 

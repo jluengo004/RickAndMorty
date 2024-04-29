@@ -22,6 +22,7 @@
 		4D3B5C922AA9DBE50018B0AD /* EpisodesMockup.json in Resources */ = {isa = PBXBuildFile; fileRef = 4D3B5C912AA9DBE50018B0AD /* EpisodesMockup.json */; };
 		4D3B5C942AA9E9660018B0AD /* BaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3B5C932AA9E9660018B0AD /* BaseTest.swift */; };
 		4DCAA4EB2BDFCEE800F15325 /* mortyAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 4DCAA4EA2BDFCEE800F15325 /* mortyAnimation.json */; };
+		4DCAA4ED2BDFEF1900F15325 /* CustomEpisodeDataMockup.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4DCAA4EC2BDFEF1900F15325 /* CustomEpisodeDataMockup.txt */; };
 		4DCBAE2D2AA4FB2A004A0F69 /* CharactersCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCBAE2C2AA4FB2A004A0F69 /* CharactersCollectionView.swift */; };
 		4DCBAE2E2AA4FB2A004A0F69 /* CharactersCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCBAE2C2AA4FB2A004A0F69 /* CharactersCollectionView.swift */; };
 		4DCBAE302AA4FB34004A0F69 /* CharactersCollectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4DCBAE2F2AA4FB34004A0F69 /* CharactersCollectionView.xib */; };
@@ -124,6 +125,7 @@
 		4D3B5C912AA9DBE50018B0AD /* EpisodesMockup.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = EpisodesMockup.json; sourceTree = "<group>"; };
 		4D3B5C932AA9E9660018B0AD /* BaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTest.swift; sourceTree = "<group>"; };
 		4DCAA4EA2BDFCEE800F15325 /* mortyAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = mortyAnimation.json; sourceTree = "<group>"; };
+		4DCAA4EC2BDFEF1900F15325 /* CustomEpisodeDataMockup.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = CustomEpisodeDataMockup.txt; sourceTree = "<group>"; };
 		4DCBAE2C2AA4FB2A004A0F69 /* CharactersCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersCollectionView.swift; sourceTree = "<group>"; };
 		4DCBAE2F2AA4FB34004A0F69 /* CharactersCollectionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CharactersCollectionView.xib; sourceTree = "<group>"; };
 		4DCBAE322AA5F5A8004A0F69 /* CharacterFilterBackdrop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterFilterBackdrop.swift; sourceTree = "<group>"; };
@@ -236,6 +238,7 @@
 				4D3B5C862AA9D0720018B0AD /* CharactersMockup.json */,
 				4D3B5C8D2AA9DA8F0018B0AD /* CharactersFilterMockup.json */,
 				4D3B5C912AA9DBE50018B0AD /* EpisodesMockup.json */,
+				4DCAA4EC2BDFEF1900F15325 /* CustomEpisodeDataMockup.txt */,
 			);
 			path = Mockups;
 			sourceTree = "<group>";
@@ -532,6 +535,7 @@
 			files = (
 				4D3B5C8E2AA9DA8F0018B0AD /* CharactersFilterMockup.json in Resources */,
 				4DFCDEB02AA853D400EC588A /* QuizViewController.xib in Resources */,
+				4DCAA4ED2BDFEF1900F15325 /* CustomEpisodeDataMockup.txt in Resources */,
 				4D3B5C872AA9D0720018B0AD /* CharactersMockup.json in Resources */,
 				4DCBAE312AA4FB34004A0F69 /* CharactersCollectionView.xib in Resources */,
 				4D3B5C922AA9DBE50018B0AD /* EpisodesMockup.json in Resources */,

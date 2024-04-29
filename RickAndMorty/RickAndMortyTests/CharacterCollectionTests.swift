@@ -7,14 +7,17 @@
 
 import Foundation
 import XCTest
+import Combine
 @testable import RickAndMorty
 
 final class CharacterCollectionViewProtocol: CharactersCollectionViewProtocol {
+    var errorCalled = false
     var loadedCharacters = false
     var toastCalled = false
     
     func loadCharactersCollection(characters: [Character], filters: CharacterFilterParams?) { loadedCharacters = true }
     func emptyFilterCharacters() { toastCalled = true }
+    func showErrorAlert(error: String) { errorCalled = true }
 }
 
 
@@ -76,31 +79,41 @@ final class CharacterCollectionTests: BaseTest {
 
 // MARK: Services Mock's
 final class CharacterServiceSuccessMock: CharacterService {
-    override func startCharacterPaginationNetworkCall(url: URL, completion: @escaping (Result<CharacterPagination, ServiceErrors>) -> Void) {
+    override func getCharacterPage(page: Int) -> AnyPublisher<CharacterPagination, ServiceErrors> {
         let jsonData = (try? JSONHelper().getData(bundle: Bundle(for: type(of: self)), for: "CharactersMockup")) ?? Data()
         let characterPagination: CharacterPagination? =  try? JSONDecoder().decode(CharacterPagination.self, from: jsonData)
         if let characterPagination = characterPagination {
-            completion(.success(characterPagination))
+            return Future<CharacterPagination, ServiceErrors> { promise in
+                promise(.success(characterPagination))
+            }
+            .eraseToAnyPublisher()
         } else {
-            completion(.failure(.emptyResponse))
+            return Fail<CharacterPagination, ServiceErrors>(error: .emptyResponse).eraseToAnyPublisher()
         }
     }
 }
 
 final class FilterCharacterServiceSuccessMock: CharacterService {
-    override func startCharacterPaginationNetworkCall(url: URL, completion: @escaping (Result<CharacterPagination, ServiceErrors>) -> Void) {
-        let jsonData = (try? JSONHelper().getData(bundle: Bundle(for: type(of: self)), for: "CharactersFilterMockup")) ?? Data()
+    override  func getFilteredCharacters(params: CharacterFilterParams, page: Int) -> AnyPublisher<CharacterPagination, ServiceErrors> {
+        let jsonData = (try? JSONHelper().getData(bundle: Bundle(for: type(of: self)), for: "CharactersMockup")) ?? Data()
         let characterPagination: CharacterPagination? =  try? JSONDecoder().decode(CharacterPagination.self, from: jsonData)
         if let characterPagination = characterPagination {
-            completion(.success(characterPagination))
+            return Future<CharacterPagination, ServiceErrors> { promise in
+                promise(.success(characterPagination))
+            }
+            .eraseToAnyPublisher()
         } else {
-            completion(.failure(.emptyResponse))
+            return Fail<CharacterPagination, ServiceErrors>(error: .emptyResponse).eraseToAnyPublisher()
         }
     }
 }
 
 final class CharacterServiceFailureMock: CharacterService {
-    override func startCharacterPaginationNetworkCall(url: URL, completion: @escaping (Result<CharacterPagination, ServiceErrors>) -> Void) {
-        completion(.failure(.emptyResponse))
+    override func getCharacterPage(page: Int) -> AnyPublisher<CharacterPagination, ServiceErrors> {
+        return Fail<CharacterPagination, ServiceErrors>(error: .emptyResponse).eraseToAnyPublisher()
+    }
+    
+    override  func getFilteredCharacters(params: CharacterFilterParams, page: Int) -> AnyPublisher<CharacterPagination, ServiceErrors> {
+        return Fail<CharacterPagination, ServiceErrors>(error: .emptyResponse).eraseToAnyPublisher()
     }
 }
