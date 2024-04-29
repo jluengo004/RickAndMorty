@@ -46,7 +46,9 @@ final class CharactersCollectionPresenter {
             guard let filters = self.filters else { return }
             characterService.getFilteredCharacters(params: filters, page: filteredCharacterPageCount)
                 .sink { completion in
-                    
+                    if case .failure(_) = completion {
+                        self.charactersCollectionVCProtocol?.emptyFilterCharacters()
+                    }
                 } receiveValue: { filteredCharactersPagination in
                     self.filteredCharacters.append(contentsOf: filteredCharactersPagination.results)
                     self.charactersCollectionVCProtocol?.loadCharactersCollection(characters: self.filteredCharacters, filters: filters)

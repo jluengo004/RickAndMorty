@@ -26,7 +26,7 @@ public enum ServiceErrors: Error, LocalizedError {
         }
     }
 }
-//<T: Codable>
+
 public final class NetworkManager {
     
     private var bindings = Set<AnyCancellable>()
