@@ -28,6 +28,9 @@ public enum ServiceErrors: Error, LocalizedError {
 }
 //<T: Codable>
 public final class NetworkManager {
+    
+    private var bindings = Set<AnyCancellable>()
+    
     public func httpGet(url: URL) -> AnyPublisher<Data, ServiceErrors> {
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
@@ -39,12 +42,23 @@ public final class NetworkManager {
             }
             .eraseToAnyPublisher()
         } else {
-            return URLSession.shared
-                        .dataTaskPublisher(for: url)
-                        .map { $0.data }
-                        .mapError { error in .networkError(error.localizedDescription, error.errorCode)}
-                        .share()
-                        .eraseToAnyPublisher()
+            let networkPublisher = URLSession.shared
+                .dataTaskPublisher(for: url)
+                .map { $0.data }
+                .mapError { error -> ServiceErrors in
+                    return .networkError(error.localizedDescription, error.errorCode)
+                }
+                .share()
+                .eraseToAnyPublisher()
+            
+            networkPublisher.sink { completion in
+                
+            } receiveValue: { data in
+                self.saveInCache(url: url.absoluteString, data: data)
+            }
+            .store(in: &bindings)
+
+            return networkPublisher
         }
         
     }
