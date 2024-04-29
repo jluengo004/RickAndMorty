@@ -39,8 +39,7 @@ open class RealmManager {
     
     public func fetchAllObjects() {
         guard let realm = realm else { return }
-        let obkects =  realm.objects(RealmCacheObject.self)
-        print(obkects)
+        let objects =  realm.objects(RealmCacheObject.self)
     }
     
 }

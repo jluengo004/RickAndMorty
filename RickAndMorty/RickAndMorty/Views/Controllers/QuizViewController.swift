@@ -13,6 +13,7 @@ protocol QuizViewProtocol: AnyObject {
     func loadQuizView()
     func loadCorrectGuess(character: Character)
     func loadIncorrectGuess()
+    func showErrorAlert(error: String)
 }
 
 final class QuizViewController: UIViewController {
@@ -235,6 +236,11 @@ extension QuizViewController: QuizViewProtocol {
         self.filteredCharacters = allCharacters
         self.characterNamesTableView.reloadData()
     }
+    
+    func showErrorAlert(error: String) {
+            self.navigationController?.popViewController(animated: true)
+            showAlertMessage(title: "Alert", message: error)
+        }
 }
 
 extension QuizViewController: CharacterCollecionViewCellDelegate {

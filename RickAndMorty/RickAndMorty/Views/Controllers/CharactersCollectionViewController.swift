@@ -10,6 +10,7 @@ import UIKit
 protocol CharactersCollectionViewProtocol: AnyObject {
     func loadCharactersCollection(characters: [Character], filters: CharacterFilterParams?)
     func emptyFilterCharacters()
+    func showErrorAlert(error: String)
 }
 
 final class CharactersCollectionViewController: UIViewController {
@@ -141,6 +142,11 @@ extension CharactersCollectionViewController: CharactersCollectionViewProtocol {
         DispatchQueue.main.async {
             self.showToast(message: "No character meets that filter", isError: true)
         }
+    }
+    
+    func showErrorAlert(error: String) {
+        self.navigationController?.popViewController(animated: true)
+        showAlertMessage(title: "Alert", message: error)
     }
 }
 

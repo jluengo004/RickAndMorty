@@ -37,7 +37,7 @@ final class CharactersCollectionPresenter {
                     }
                     
                 case .failure(let error):
-                    print(error)
+                    self.charactersCollectionVCProtocol?.showErrorAlert(error: error.localizedDescription)
                 }
             }
         }

@@ -64,7 +64,7 @@ final class QuizPresenter {
                 }
                 
             case .failure(let error):
-                print(error)
+                self.quizVCProtocol?.showErrorAlert(error: error.localizedDescription)
             }
         }
     }
@@ -86,7 +86,7 @@ final class QuizPresenter {
                 }
                 
             case .failure(let error):
-                print(error)
+                self.quizVCProtocol?.showErrorAlert(error: error.localizedDescription)
             }
         }
     }
