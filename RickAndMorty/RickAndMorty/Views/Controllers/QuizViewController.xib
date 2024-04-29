@@ -11,6 +11,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="QuizViewController" customModule="RickAndMorty" customModuleProvider="target">
             <connections>
+                <outlet property="animationLabel" destination="HS5-1y-rlD" id="jUq-Ff-Twf"/>
+                <outlet property="animationView" destination="evh-2y-4lI" id="zMq-dt-2wY"/>
                 <outlet property="characterNamesTableView" destination="4f6-bf-Uc5" id="RDM-dZ-D3M"/>
                 <outlet property="episodeImageView" destination="JMk-ke-ASX" id="vEl-W6-HDe"/>
                 <outlet property="episodeLabel" destination="paJ-RH-56n" id="3ku-Db-4Go"/>
@@ -87,6 +89,26 @@
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="evh-2y-4lI" customClass="LottieAnimationView" customModule="Lottie">
+                            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HS5-1y-rlD">
+                                    <rect key="frame" x="64" y="767.66666666666663" width="265" height="20.333333333333371"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstItem="HS5-1y-rlD" firstAttribute="leading" secondItem="evh-2y-4lI" secondAttribute="leading" constant="64" id="7NI-rQ-HfJ"/>
+                                <constraint firstAttribute="bottom" secondItem="HS5-1y-rlD" secondAttribute="bottom" constant="64" id="VA4-5L-72R"/>
+                                <constraint firstAttribute="trailing" secondItem="HS5-1y-rlD" secondAttribute="trailing" constant="64" id="x0y-Y3-uLZ"/>
+                            </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="animationName" value="mortyAnimation"/>
+                            </userDefinedRuntimeAttributes>
+                        </view>
                     </subviews>
                     <viewLayoutGuide key="safeArea" id="5xW-ZE-6eR"/>
                     <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
@@ -102,14 +124,18 @@
                         <constraint firstItem="paJ-RH-56n" firstAttribute="top" secondItem="5xW-ZE-6eR" secondAttribute="top" id="Mal-ey-gJm"/>
                         <constraint firstItem="1ax-k9-4LB" firstAttribute="top" secondItem="2XG-BH-zhP" secondAttribute="bottom" constant="20" id="Mxs-fn-wdQ"/>
                         <constraint firstItem="1ax-k9-4LB" firstAttribute="top" secondItem="fzu-21-43U" secondAttribute="bottom" id="QPU-c1-iCj"/>
+                        <constraint firstItem="evh-2y-4lI" firstAttribute="leading" secondItem="V3K-01-mhV" secondAttribute="leading" id="QrL-qG-cdp"/>
                         <constraint firstItem="JMk-ke-ASX" firstAttribute="top" secondItem="paJ-RH-56n" secondAttribute="bottom" constant="7" id="Smu-yN-x21"/>
                         <constraint firstAttribute="bottom" secondItem="1ax-k9-4LB" secondAttribute="bottom" id="Ufj-EJ-8vH"/>
+                        <constraint firstItem="evh-2y-4lI" firstAttribute="top" secondItem="V3K-01-mhV" secondAttribute="top" id="VgM-gZ-pts"/>
                         <constraint firstItem="mc8-I8-ieE" firstAttribute="leading" secondItem="5xW-ZE-6eR" secondAttribute="leading" constant="16" id="Zf2-9t-lpF"/>
                         <constraint firstItem="4f6-bf-Uc5" firstAttribute="leading" secondItem="2XG-BH-zhP" secondAttribute="leading" id="aII-Wl-jPw"/>
                         <constraint firstItem="5xW-ZE-6eR" firstAttribute="trailing" secondItem="qER-tG-z0V" secondAttribute="trailing" constant="16" id="blY-8d-P3M"/>
                         <constraint firstItem="5xW-ZE-6eR" firstAttribute="trailing" secondItem="mc8-I8-ieE" secondAttribute="trailing" constant="16" id="d22-tW-LEt"/>
                         <constraint firstItem="JMk-ke-ASX" firstAttribute="leading" secondItem="5xW-ZE-6eR" secondAttribute="leading" constant="60" id="ebz-O2-2WH"/>
+                        <constraint firstAttribute="trailing" secondItem="evh-2y-4lI" secondAttribute="trailing" id="f8C-0k-9T1"/>
                         <constraint firstItem="5xW-ZE-6eR" firstAttribute="trailing" secondItem="2XG-BH-zhP" secondAttribute="trailing" constant="80" id="haK-wk-mdF"/>
+                        <constraint firstAttribute="bottom" secondItem="evh-2y-4lI" secondAttribute="bottom" id="kKQ-Aw-0FZ"/>
                         <constraint firstItem="4f6-bf-Uc5" firstAttribute="width" secondItem="2XG-BH-zhP" secondAttribute="width" id="nM5-an-fIw"/>
                         <constraint firstItem="qER-tG-z0V" firstAttribute="centerX" secondItem="5xW-ZE-6eR" secondAttribute="centerX" id="pbe-HN-Ga4"/>
                         <constraint firstItem="5xW-ZE-6eR" firstAttribute="trailing" secondItem="paJ-RH-56n" secondAttribute="trailing" constant="16" id="rNh-qH-gxv"/>
@@ -121,6 +147,9 @@
                         <constraint firstItem="qER-tG-z0V" firstAttribute="top" relation="greaterThanOrEqual" secondItem="mc8-I8-ieE" secondAttribute="bottom" constant="15" id="wza-ho-uWD"/>
                         <constraint firstItem="fzu-21-43U" firstAttribute="top" secondItem="5xW-ZE-6eR" secondAttribute="top" id="xwz-X8-nhR"/>
                     </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="animationName" value="rick_thinking"/>
+                    </userDefinedRuntimeAttributes>
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="K1k-Ph-Wi8"/>

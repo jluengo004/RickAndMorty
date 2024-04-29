@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Lottie
 
 protocol QuizViewProtocol: AnyObject {
     func loadQuizView()
@@ -23,6 +24,8 @@ final class QuizViewController: UIViewController {
     private var filteredCharacters: [Character]?
     private var unsolvedCharacters: [Character]?
 
+    @IBOutlet weak var animationView: LottieAnimationView!
+    @IBOutlet weak var animationLabel: UILabel!
     @IBOutlet weak var topViewForGesture: UIView!
     @IBOutlet weak var episodeLabel: UILabel!
     @IBOutlet weak var episodeImageView: UIImageView!
@@ -48,12 +51,32 @@ final class QuizViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setLoadingGif()
+        self.configureStaticInfo()
         self.presenter?.setQuizViewProtocol(viewProtocol: self)
         self.setNavigationBar()
+        self.nameTextField.delegate = self
         self.configureCharactersNameTable()
         self.configureCharactersView()
         self.presenter?.loadAllEpisodes()
         self.presenter?.loadAllCharacters()
+    }
+    
+    func setLoadingGif() {
+        animationView.contentMode = .scaleAspectFit
+        animationView.loopMode = .loop
+        animationView.animationSpeed = 0.75
+        animationView.play()
+    }
+    
+    func configureStaticInfo() {
+        self.nameTextField.layer.cornerRadius = 10
+        self.nameTextField.layer.borderWidth = 1
+        self.nameTextField.layer.borderColor = UIColor.systemGray4.cgColor
+        self.episodeLabel.font = UIFont.boldSystemFont(ofSize: 20.0)
+        self.guessLabel.text = "Guess the characters that appear in this episode"
+        self.animationLabel.font = UIFont.boldSystemFont(ofSize: 18.0)
+        self.animationLabel.text = "Admire my secret moves while I load the data"
     }
     
     func setNavigationBar() {
@@ -86,14 +109,10 @@ final class QuizViewController: UIViewController {
     
     func configureView() {
         DispatchQueue.main.async() { [weak self] in
-            self?.nameTextField.layer.cornerRadius = 10
-            self?.nameTextField.layer.borderWidth = 1
             self?.nameTextField.layer.borderColor = UIColor.systemGray4.cgColor
             self?.downloadEpisodeImage()
             self?.episodeLabel.text = self?.episode?.name
-            self?.episodeLabel.font = UIFont.boldSystemFont(ofSize: 20.0)
             self?.synopsisLabel.text = self?.episode?.synopsis
-            self?.guessLabel.text = "Guess the characters that appear in this episode"
             
             let unsolvedCharacter = Character(id: 9999, name: "¿¿??")
             self?.unsolvedCharacters = []
@@ -101,6 +120,11 @@ final class QuizViewController: UIViewController {
                 self?.unsolvedCharacters?.append(unsolvedCharacter)
             }
             self?.charactersViews?.reloadWith(characters: self?.unsolvedCharacters ?? [])
+            self?.charactersViews?.charactersCollectionView.setContentOffset(.zero, animated: false)
+            self?.characterNamesTableView.reloadData()
+            if self?.animationView != nil {
+                self?.animationView.removeFromSuperview()
+            }
         }
     }
     
@@ -172,7 +196,6 @@ extension QuizViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension QuizViewController: QuizViewProtocol {
     func loadQuizView() {
-        self.nameTextField.delegate = self
         self.loadAndConfigureView()
     }
     

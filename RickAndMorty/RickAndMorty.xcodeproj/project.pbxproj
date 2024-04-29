@@ -21,6 +21,7 @@
 		4D3B5C902AA9DB6C0018B0AD /* QuizTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3B5C8F2AA9DB6C0018B0AD /* QuizTests.swift */; };
 		4D3B5C922AA9DBE50018B0AD /* EpisodesMockup.json in Resources */ = {isa = PBXBuildFile; fileRef = 4D3B5C912AA9DBE50018B0AD /* EpisodesMockup.json */; };
 		4D3B5C942AA9E9660018B0AD /* BaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3B5C932AA9E9660018B0AD /* BaseTest.swift */; };
+		4DCAA4EB2BDFCEE800F15325 /* mortyAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 4DCAA4EA2BDFCEE800F15325 /* mortyAnimation.json */; };
 		4DCBAE2D2AA4FB2A004A0F69 /* CharactersCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCBAE2C2AA4FB2A004A0F69 /* CharactersCollectionView.swift */; };
 		4DCBAE2E2AA4FB2A004A0F69 /* CharactersCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCBAE2C2AA4FB2A004A0F69 /* CharactersCollectionView.swift */; };
 		4DCBAE302AA4FB34004A0F69 /* CharactersCollectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4DCBAE2F2AA4FB34004A0F69 /* CharactersCollectionView.xib */; };
@@ -122,6 +123,7 @@
 		4D3B5C8F2AA9DB6C0018B0AD /* QuizTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizTests.swift; sourceTree = "<group>"; };
 		4D3B5C912AA9DBE50018B0AD /* EpisodesMockup.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = EpisodesMockup.json; sourceTree = "<group>"; };
 		4D3B5C932AA9E9660018B0AD /* BaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTest.swift; sourceTree = "<group>"; };
+		4DCAA4EA2BDFCEE800F15325 /* mortyAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = mortyAnimation.json; sourceTree = "<group>"; };
 		4DCBAE2C2AA4FB2A004A0F69 /* CharactersCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersCollectionView.swift; sourceTree = "<group>"; };
 		4DCBAE2F2AA4FB34004A0F69 /* CharactersCollectionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CharactersCollectionView.xib; sourceTree = "<group>"; };
 		4DCBAE322AA5F5A8004A0F69 /* CharacterFilterBackdrop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterFilterBackdrop.swift; sourceTree = "<group>"; };
@@ -281,6 +283,7 @@
 				4DE0A5872AA49B4F0067317F /* Assets.xcassets */,
 				4DE0A5892AA49B4F0067317F /* LaunchScreen.storyboard */,
 				4DE0A58C2AA49B4F0067317F /* Info.plist */,
+				4DCAA4EA2BDFCEE800F15325 /* mortyAnimation.json */,
 			);
 			path = RickAndMorty;
 			sourceTree = "<group>";
@@ -511,6 +514,7 @@
 			files = (
 				4DE0A58B2AA49B4F0067317F /* LaunchScreen.storyboard in Resources */,
 				4DFCDE8E2AA7385A00EC588A /* CharacterPortraitCollectionViewCell.xib in Resources */,
+				4DCAA4EB2BDFCEE800F15325 /* mortyAnimation.json in Resources */,
 				4DFCDEAF2AA853D400EC588A /* QuizViewController.xib in Resources */,
 				4DE0A5882AA49B4F0067317F /* Assets.xcassets in Resources */,
 				4DE0A5E32AA4F3D70067317F /* CharacterCollecionViewCell.xib in Resources */,
