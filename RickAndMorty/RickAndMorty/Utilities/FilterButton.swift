@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class FilterButton : UIButton {
+final class FilterButton : UIButton {
     var status: CharacterStatus?
     var gender: CharacterGender?
     

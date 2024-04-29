@@ -12,7 +12,7 @@ protocol CharactersCollectionViewProtocol: AnyObject {
     func emptyFilterCharacters()
 }
 
-class CharactersCollectionViewController: UIViewController {
+final class CharactersCollectionViewController: UIViewController {
     private let presenter: CharactersCollectionPresenter?
     private var charactersViews: CharactersCollectionView?
     private var characterFilterBackdrop: CharacterFilterBackdrop?

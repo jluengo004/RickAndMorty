@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class QuizPresenter {
+final class QuizPresenter {
     private var quizVCProtocol: QuizViewProtocol?
     var episodeService = EpisodeService()
     var characterService = CharacterService()

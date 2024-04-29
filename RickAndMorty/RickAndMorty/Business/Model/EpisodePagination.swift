@@ -7,18 +7,7 @@
 
 import Foundation
 
-public struct EpisodePagination: Decodable {
-    var info: PaginationInfo
-    var results: [Episode]
-
-    enum CodingKeys: String, CodingKey {
-        case info
-        case results
-    }
-    
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.info = try container.decode(PaginationInfo.self, forKey: .info)
-        self.results = try container.decode([Episode].self, forKey: .results)
-    }
+public struct EpisodePagination: Codable {
+    let info: PaginationInfo
+    let results: [Episode]
 }

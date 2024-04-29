@@ -14,7 +14,7 @@ protocol QuizViewProtocol: AnyObject {
     func loadIncorrectGuess()
 }
 
-class QuizViewController: UIViewController {
+final class QuizViewController: UIViewController {
     private let presenter: QuizPresenter?
     private var charactersViews: CharactersCollectionView?
     private var episode: Episode?

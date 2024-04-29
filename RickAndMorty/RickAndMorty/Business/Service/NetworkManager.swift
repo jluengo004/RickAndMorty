@@ -26,7 +26,7 @@ public enum ServiceErrors: Error, LocalizedError {
     }
 }
 
-public class NetworkManager {
+public final class NetworkManager {
     public func httpGet(url: URL, completion: @escaping (Result<Data, ServiceErrors>) -> Void) {
         var request = URLRequest(url: url)
         request.httpMethod = "GET"

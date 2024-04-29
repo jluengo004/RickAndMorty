@@ -13,7 +13,7 @@ protocol CharactersCollectionViewDelegate: AnyObject {
     func loadImage(from url: URL, completion: @escaping (UIImage?) -> Void)
 }
 
-class CharactersCollectionView: UIView  {
+final class CharactersCollectionView: UIView  {
     private var characters: [Character] = []
     private var isPageRefreshing: Bool = false
     public var selectedIndexPath: IndexPath?

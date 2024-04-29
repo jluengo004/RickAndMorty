@@ -21,7 +21,7 @@ public enum CharacterGender: String {
     case unknown = "unkonwn"
 }
 
-public class CharacterFilterParams: Equatable {
+public final class CharacterFilterParams: Equatable {
     var ids: [String]?
     var name: String?
     var status: CharacterStatus?

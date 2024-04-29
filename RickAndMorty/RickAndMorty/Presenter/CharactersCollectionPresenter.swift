@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class CharactersCollectionPresenter {
+final class CharactersCollectionPresenter {
     private var characterPageCount = 1
     private var isCharacterLastPage = false
     private var filteredCharacterPageCount = 1

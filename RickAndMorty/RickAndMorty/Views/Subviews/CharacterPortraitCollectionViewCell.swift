@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class CharacterPortraitCollectionViewCell: UICollectionViewCell {
+final class CharacterPortraitCollectionViewCell: UICollectionViewCell {
     static let identifier = "CharacterPortraitCollectionViewCell"
     private var character: Character?
     weak var delegate: CharacterCollecionViewCellDelegate?

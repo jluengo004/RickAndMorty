@@ -12,7 +12,7 @@ protocol CharacterCollecionViewCellDelegate: AnyObject {
     func loadImage(from url: URL, completion: @escaping (UIImage?) -> Void)
 }
 
-class CharacterCollecionViewCell: UICollectionViewCell {
+final class CharacterCollecionViewCell: UICollectionViewCell {
     static let identifier = "CharacterCollecionViewCell"
     private var character: Character?
     weak var delegate: CharacterCollecionViewCellDelegate?

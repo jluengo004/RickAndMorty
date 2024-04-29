@@ -13,7 +13,7 @@ public protocol CharacterFilterBackdropDelegate {
     func dismissView()
 }
 
-public class CharacterFilterBackdrop: UIView {
+final public class CharacterFilterBackdrop: UIView {
     @IBOutlet public var containerView: CharacterFilterBackdrop!
     @IBOutlet private weak var backgroundView: UIView!
     @IBOutlet public weak var contentView: UIView!

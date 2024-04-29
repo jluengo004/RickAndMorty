@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class CharacterNameTableViewCell: UITableViewCell {
+final class CharacterNameTableViewCell: UITableViewCell {
     static let identifier = "CharacterNameTableViewCell"
     private var character: Character?
     weak var delegate: CharacterCollecionViewCellDelegate?
