@@ -20,7 +20,7 @@ final class HTTMLParser {
             
             let paragraphs = html.components(separatedBy: "<p>").dropFirst().dropFirst()
             let synopsis = paragraphs.compactMap { $0.components(separatedBy: "</p>").first }
-                                    .filter { !$0.contains("<") }.first
+                                    .first { !$0.contains("<") }
             
             return .success((imageString,synopsis))
         } catch {
