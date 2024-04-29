@@ -9,7 +9,7 @@ import Foundation
 import XCTest
 @testable import RickAndMorty
 
-class CharacterCollectionViewProtocol: CharactersCollectionViewProtocol {
+final class CharacterCollectionViewProtocol: CharactersCollectionViewProtocol {
     var loadedCharacters = false
     var toastCalled = false
     
@@ -75,7 +75,7 @@ final class CharacterCollectionTests: BaseTest {
 }
 
 // MARK: Services Mock's
-class CharacterServiceSuccessMock: CharacterService {
+final class CharacterServiceSuccessMock: CharacterService {
     override func startCharacterPaginationNetworkCall(url: URL, completion: @escaping (Result<CharacterPagination, ServiceErrors>) -> Void) {
         let jsonData = (try? JSONHelper().getData(bundle: Bundle(for: type(of: self)), for: "CharactersMockup")) ?? Data()
         let characterPagination: CharacterPagination? =  try? JSONDecoder().decode(CharacterPagination.self, from: jsonData)
@@ -87,7 +87,7 @@ class CharacterServiceSuccessMock: CharacterService {
     }
 }
 
-class FilterCharacterServiceSuccessMock: CharacterService {
+final class FilterCharacterServiceSuccessMock: CharacterService {
     override func startCharacterPaginationNetworkCall(url: URL, completion: @escaping (Result<CharacterPagination, ServiceErrors>) -> Void) {
         let jsonData = (try? JSONHelper().getData(bundle: Bundle(for: type(of: self)), for: "CharactersFilterMockup")) ?? Data()
         let characterPagination: CharacterPagination? =  try? JSONDecoder().decode(CharacterPagination.self, from: jsonData)
@@ -99,7 +99,7 @@ class FilterCharacterServiceSuccessMock: CharacterService {
     }
 }
 
-class CharacterServiceFailureMock: CharacterService {
+final class CharacterServiceFailureMock: CharacterService {
     override func startCharacterPaginationNetworkCall(url: URL, completion: @escaping (Result<CharacterPagination, ServiceErrors>) -> Void) {
         completion(.failure(.emptyResponse))
     }

@@ -6,55 +6,28 @@
 //
 
 import Foundation
+import Combine
 
 public class EpisodeService {
     
     private let baseURL = "https://rickandmortyapi.com/api/episode/"
     private let networkManager = NetworkManager()
     
-    public func getEpisodeCustomData(url: URL, completion: @escaping (Result<(String?, String?), ServiceErrors>) -> Void) {
-        networkManager.httpGet(url: url) { result in
-            switch result {
-            case .success(let htmlData):
-                let html = String(decoding: htmlData, as: UTF8.self)
-                let parsingResult = HTTMLParser().parse(html: html)
-                switch parsingResult {
-                case .success(let episodeData):
-                    completion(.success(episodeData))
-                case .failure(let serviceError):
-                    completion(.failure(serviceError))
-                }
-                
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
+    public func getEpisodeCustomData(url: URL) -> AnyPublisher<Data, ServiceErrors> {
+        return networkManager.httpGet(url: url)
+            .share()
+            .eraseToAnyPublisher()
     }
     
-    public func getEpisodePage(page: Int, completion: @escaping (Result<EpisodePagination, ServiceErrors>) -> Void) {
+    public func getEpisodePage(page: Int) -> AnyPublisher<EpisodePagination, ServiceErrors> {
         guard let url = URL(string: baseURL + "?page=\(page)") else {
-            completion(.failure(.urlError))
-            return
+            return Fail<EpisodePagination, ServiceErrors>(error: .urlError(baseURL + "?page=\(page)")).eraseToAnyPublisher()
         }
-        startEpisodePaginationNetworkCall(url: url) { result in
-            completion(result)
-        }
-    }
-    
-    func startEpisodePaginationNetworkCall(url: URL, completion: @escaping (Result<EpisodePagination, ServiceErrors>) -> Void) {
-        networkManager.httpGet(url: url) { result in
-            switch result {
-            case .success(let episodesData):
-                if let episodes = try? JSONDecoder().decode(EpisodePagination.self, from: episodesData) {
-                    completion(.success(episodes))
-                } else {
-                    completion(.failure(.decodingError("EpisodePagination")))
-                }
-                
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
+        return networkManager.httpGet(url: url)
+            .decode(type: EpisodePagination.self, decoder: JSONDecoder())
+            .mapError { error in .decodingError(String(describing: EpisodePagination.self)) }
+            .share()
+            .eraseToAnyPublisher()
     }
     
 }

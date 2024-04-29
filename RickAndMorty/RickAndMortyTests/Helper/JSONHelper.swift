@@ -7,7 +7,7 @@
 
 import Foundation
 
-class JSONHelper {
+final class JSONHelper {
     func getJSONObject(bundle: Bundle, for jsonName: String) throws -> [String:Any]? {
         guard let json = try getJSON(bundle: bundle, for: jsonName)
         else { return nil }

@@ -142,7 +142,7 @@ final class QuizViewController: UIViewController {
     func configureCharactersView() {
         guard let charactersViews = UINib(nibName: "CharactersCollectionView", bundle: Bundle(for: CharactersCollectionView.self))
             .instantiate(withOwner: nil).first as? CharactersCollectionView else {
-            //TO-DO
+            self.showErrorAlert(error: "Unexpected Error")
             return
         }
         charactersViews.initialize(isQuiz: true)

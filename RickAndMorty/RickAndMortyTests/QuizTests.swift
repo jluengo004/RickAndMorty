@@ -9,7 +9,7 @@ import Foundation
 import XCTest
 @testable import RickAndMorty
 
-class QuizMockView: QuizViewProtocol {
+final class QuizMockView: QuizViewProtocol {
     var loadedQuiz = false
     var loadedCorrectGuess = false
     var loadedIncorrectGuess = false
@@ -107,7 +107,7 @@ final class QuizTests: BaseTest {
 }
 
 // MARK: Services Mock's
-class EpisodeServiceSuccessMock: EpisodeService {
+final class EpisodeServiceSuccessMock: EpisodeService {
     override func startEpisodePaginationNetworkCall(url: URL, completion: @escaping (Result<EpisodePagination, ServiceErrors>) -> Void) {
         let jsonData = (try? JSONHelper().getData(bundle: Bundle(for: type(of: self)), for: "EpisodesMockup")) ?? Data()
         let episodesPagination: EpisodePagination? =  try? JSONDecoder().decode(EpisodePagination.self, from: jsonData)
@@ -119,13 +119,13 @@ class EpisodeServiceSuccessMock: EpisodeService {
     }
 }
 
-class EpisodeServiceFailureMock: EpisodeService {
+final class EpisodeServiceFailureMock: EpisodeService {
     override func startEpisodePaginationNetworkCall(url: URL, completion: @escaping (Result<EpisodePagination, ServiceErrors>) -> Void) {
         completion(.failure(.emptyResponse))
     }
 }
 
-class EpisodeCustomInfoServiceSuccessMock: EpisodeService {
+final class EpisodeCustomInfoServiceSuccessMock: EpisodeService {
     override func getEpisodeCustomData(url: URL, completion: @escaping (Result<(String?, String?), ServiceErrors>) -> Void) {
         let imageURL = "https://static.wikia.nocookie.net/rickandmorty/images/8/89/Rms03e06.s29.png/revision/latest?cb=20171004024102"
         let synopsis = "After another exhausting adventure, Rick and Morty decide they need a vacation. But things go a little haywire when they try a special detox machine."

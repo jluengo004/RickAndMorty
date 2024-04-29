@@ -6,9 +6,10 @@
 //
 
 import Foundation
+import Combine
 
 public enum ServiceErrors: Error, LocalizedError {
-    case networkError(String, Int?), emptyResponse, urlError, paramError, decodingError(String)
+    case networkError(String, Int?), emptyResponse, urlError(String), paramError, decodingError(String)
     
     public var errorDescription: String? {
         switch self {
@@ -16,8 +17,8 @@ public enum ServiceErrors: Error, LocalizedError {
             return "Network error: \(description) with code \(code ?? 400)"
         case .emptyResponse:
             return "No model retrieved from response"
-        case .urlError:
-            return "Incorrect URL"
+        case .urlError(let url):
+            return "Incorrect URL \(url)"
         case .paramError:
             return "Incorrect parameters"
         case .decodingError(let modelName):
@@ -27,26 +28,36 @@ public enum ServiceErrors: Error, LocalizedError {
 }
 
 public final class NetworkManager {
-    public func httpGet(url: URL, completion: @escaping (Result<Data, ServiceErrors>) -> Void) {
+    
+    private var bindings = Set<AnyCancellable>()
+    
+    public func httpGet(url: URL) -> AnyPublisher<Data, ServiceErrors> {
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         let cache = RealmManager()
         cache.fetchAllObjects()
         if let dataCache = fetchFromCache(url: url.absoluteString) {
-            completion(.success(dataCache))
-        } else {
-            let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
-                if let error = error {
-                    let code = (response as? HTTPURLResponse)?.statusCode
-                    completion(.failure(.networkError(error.localizedDescription, code)))
-                }
-                
-                if let data = data {
-                    self.saveInCache(url: url.absoluteString, data: data)
-                    completion(.success(data))
-                }
+            return Future<Data, ServiceErrors> { promise in
+                promise(.success(dataCache))
             }
-            task.resume()
+            .eraseToAnyPublisher()
+        } else {
+            let networkPublisher = URLSession.shared
+                .dataTaskPublisher(for: url)
+                .map { $0.data }
+                .mapError { error -> ServiceErrors in
+                    return .networkError(error.localizedDescription, error.errorCode)
+                }
+                .share()
+                .eraseToAnyPublisher()
+            
+            networkPublisher.sink { completion in
+            } receiveValue: { data in
+                self.saveInCache(url: url.absoluteString, data: data)
+            }
+            .store(in: &bindings)
+
+            return networkPublisher
         }
         
     }
