@@ -19,16 +19,14 @@ final class CharactersCollectionPresenter {
     var filters: CharacterFilterParams?
     var characterService = CharacterService()
     weak var charactersCollectionVCProtocol: CharactersCollectionViewProtocol?
-    
     private var bindings = Set<AnyCancellable>()
-    @Published private(set) var combineCharacters: [Character] = []
     
     func setCharacterViewProtocol(viewProtocol: CharactersCollectionViewProtocol) {
         self.charactersCollectionVCProtocol = viewProtocol
     }
     
     func loadCharacters() {
-        characterService.getCharacterPage2(page: characterPageCount)
+        characterService.getCharacterPage(page: characterPageCount)
             .sink { completion in
                 
             } receiveValue: { charactersPagination in
@@ -43,13 +41,13 @@ final class CharactersCollectionPresenter {
             .store(in: &bindings)
     }
     
-    
     func loadFilterCharacters() {
         if !isFilteredCharacterLastPage {
             guard let filters = self.filters else { return }
-            characterService.getFilteredCharacters(params: filters, page: filteredCharacterPageCount) { result in
-                switch result {
-                case .success(let filteredCharactersPagination):
+            characterService.getFilteredCharacters(params: filters, page: filteredCharacterPageCount)
+                .sink { completion in
+                    
+                } receiveValue: { filteredCharactersPagination in
                     self.filteredCharacters.append(contentsOf: filteredCharactersPagination.results)
                     self.charactersCollectionVCProtocol?.loadCharactersCollection(characters: self.filteredCharacters, filters: filters)
                     if filteredCharactersPagination.info.next != nil {
@@ -57,11 +55,8 @@ final class CharactersCollectionPresenter {
                     } else {
                         self.isFilteredCharacterLastPage = true
                     }
-                    
-                case .failure(_):
-                    self.charactersCollectionVCProtocol?.emptyFilterCharacters()
                 }
-            }
+                .store(in: &bindings)
         }
     }
     

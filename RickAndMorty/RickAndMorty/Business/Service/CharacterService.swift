@@ -118,52 +118,27 @@ public class CharacterService {
     private let baseURL = "https://rickandmortyapi.com/api/character/"
     private let networkManager = NetworkManager()
     
-    public func getCharacterPage2(page: Int) -> AnyPublisher<CharacterPagination, ServiceErrors> {
+    public func getCharacterPage(page: Int) -> AnyPublisher<CharacterPagination, ServiceErrors> {
         guard let url = URL(string: baseURL + "?page=\(page)") else {
-            return Fail<CharacterPagination, ServiceErrors>(error: .urlError).eraseToAnyPublisher()
+            return Fail<CharacterPagination, ServiceErrors>(error: .urlError(baseURL + "?page=\(page)")).eraseToAnyPublisher()
         }
-        return networkManager.httpGet2(url: url)
+        return networkManager.httpGet(url: url)
             .decode(type: CharacterPagination.self, decoder: JSONDecoder())
-            .mapError { error in .decodingError("CharacterPagination") }
+            .mapError { error in .decodingError(String(describing: CharacterPagination.self)) }
             .share()
             .eraseToAnyPublisher()
     }
     
-    public func getCharacterPage(page: Int, completion: @escaping (Result<CharacterPagination, ServiceErrors>) -> Void) {
-        guard let url = URL(string: baseURL + "?page=\(page)") else {
-            completion(.failure(.urlError))
-            return
-        }
-        startCharacterPaginationNetworkCall(url: url) { result in
-            completion(result)
-        }
-    }
-    
-    public func getFilteredCharacters(params: CharacterFilterParams, page: Int, completion: @escaping (Result<CharacterPagination, ServiceErrors>) -> Void) {
+    public func getFilteredCharacters(params: CharacterFilterParams, page: Int) -> AnyPublisher<CharacterPagination, ServiceErrors> {
         var urlComps = URLComponents(string: baseURL)
         urlComps?.queryItems = params.getQueryFilterParams(page: page)
         guard let url = urlComps?.url else {
-            completion(.failure(.paramError))
-            return
+            return Fail<CharacterPagination, ServiceErrors>(error: .paramError).eraseToAnyPublisher()
         }
-        startCharacterPaginationNetworkCall(url: url) { result in
-            completion(result)
-        }
-    }
-    
-    func startCharacterPaginationNetworkCall(url: URL, completion: @escaping (Result<CharacterPagination, ServiceErrors>) -> Void) {
-        networkManager.httpGet(url: url) { result in
-            switch result {
-            case .success(let charactersData):
-                if let characters = try? JSONDecoder().decode(CharacterPagination.self, from: charactersData) {
-                    completion(.success(characters))
-                } else {
-                    completion(.failure(.decodingError("CharacterPagination")))
-                }
-                
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
+        return networkManager.httpGet(url: url)
+            .decode(type: CharacterPagination.self, decoder: JSONDecoder())
+            .mapError { error in .decodingError(String(describing: CharacterPagination.self)) }
+            .share()
+            .eraseToAnyPublisher()
     }
 }

@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Combine
 
 final class QuizPresenter {
     private var quizVCProtocol: QuizViewProtocol?
@@ -19,6 +20,7 @@ final class QuizPresenter {
     var quizEpisode: Episode?
     private let imageCache = NSCache<AnyObject, AnyObject>()
     private let baseCustomEpisodeURL = "https://rickandmorty.fandom.com/wiki/"
+    private var bindings = Set<AnyCancellable>()
     
     func setQuizViewProtocol(viewProtocol: QuizViewProtocol) {
         self.quizVCProtocol = viewProtocol
@@ -32,6 +34,28 @@ final class QuizPresenter {
             self.quizVCProtocol?.loadCorrectGuess(character: guessedCharacter)
         }
     }
+    /*
+     func selectAndLoadEpisode(completion: @escaping (Episode?) -> Void) {
+         var episode = episodes[Int.random(in: 0...(episodes.count - 1))]
+         var episodeNameAsURL = episode.name.replacingOccurrences(of: " ", with: "_")
+                                             .replacingOccurrences(of: ",", with: "")
+         episodeNameAsURL = episode.episode == "S04E10" ? episodeNameAsURL.replacingOccurrences(of: ":", with: "") : episodeNameAsURL
+         let episodeCustomURL = URL(string: baseCustomEpisodeURL + episodeNameAsURL)
+         guard let episodeCustomURL = episodeCustomURL else { return }
+         episodeService.getEpisodeCustomData(url: episodeCustomURL) { result in
+             switch result {
+             case .success(let response):
+                 episode.setCustomData(info: response)
+                 self.quizEpisode = episode
+                 completion(episode)
+             case .failure(let errorModel):
+                 print (errorModel)
+                 completion(nil)
+             }
+         }
+     }
+     */
+    
     
     func selectAndLoadEpisode(completion: @escaping (Episode?) -> Void) {
         var episode = episodes[Int.random(in: 0...(episodes.count - 1))]
@@ -40,33 +64,36 @@ final class QuizPresenter {
         episodeNameAsURL = episode.episode == "S04E10" ? episodeNameAsURL.replacingOccurrences(of: ":", with: "") : episodeNameAsURL
         let episodeCustomURL = URL(string: baseCustomEpisodeURL + episodeNameAsURL)
         guard let episodeCustomURL = episodeCustomURL else { return }
-        episodeService.getEpisodeCustomData(url: episodeCustomURL) { result in
-            switch result {
-            case .success(let response):
-                episode.setCustomData(info: response)
-                self.quizEpisode = episode
-                completion(episode)
-            case .failure(let errorModel):
-                print (errorModel)
-                completion(nil)
+        episodeService.getEpisodeCustomData(url: episodeCustomURL)
+            .sink { completion in
+                
+            } receiveValue: { episodeData in
+                let html = String(decoding: episodeData, as: UTF8.self)
+                let parsingResult = HTTMLParser().parse(html: html)
+                switch parsingResult {
+                case .success(let episodeData):
+                    episode.setCustomData(info: episodeData)
+                    self.quizEpisode = episode
+                    completion(episode)
+                case .failure(_):
+                    completion(nil)
+                }
             }
-        }
+            .store(in: &bindings)
     }
     
     func loadAllEpisodes() {
-        episodeService.getEpisodePage(page: episodePageCount) { result in
-            switch result {
-            case .success(let episodesPagination):
+        episodeService.getEpisodePage(page: episodePageCount)
+            .sink { completion in
+                
+            } receiveValue: { episodesPagination in
                 self.episodes.append(contentsOf: episodesPagination.results)
                 if episodesPagination.info.next != nil {
                     self.episodePageCount += 1
                     self.loadAllEpisodes()
                 }
-                
-            case .failure(let error):
-                print(error)
             }
-        }
+            .store(in: &bindings)
     }
     
     func getEpisodes() -> [Episode] {
@@ -74,9 +101,10 @@ final class QuizPresenter {
     }
     
     func loadAllCharacters() {
-        characterService.getCharacterPage(page: characterPageCount) { result in
-            switch result {
-            case .success(let charactersPagination):
+        characterService.getCharacterPage(page: characterPageCount)
+            .sink { completion in
+                
+            } receiveValue: { charactersPagination in
                 self.characters.append(contentsOf: charactersPagination.results)
                 if charactersPagination.info.next != nil {
                     self.characterPageCount += 1
@@ -84,11 +112,8 @@ final class QuizPresenter {
                 } else {
                     self.quizVCProtocol?.loadQuizView()
                 }
-                
-            case .failure(let error):
-                print(error)
             }
-        }
+            .store(in: &bindings)
     }
     
     func getCharacters() -> [Character] {
