@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Combine
 
 final class CharactersCollectionPresenter {
     private var characterPageCount = 1
@@ -19,29 +20,29 @@ final class CharactersCollectionPresenter {
     var characterService = CharacterService()
     weak var charactersCollectionVCProtocol: CharactersCollectionViewProtocol?
     
+    private var bindings = Set<AnyCancellable>()
+    @Published private(set) var combineCharacters: [Character] = []
+    
     func setCharacterViewProtocol(viewProtocol: CharactersCollectionViewProtocol) {
         self.charactersCollectionVCProtocol = viewProtocol
     }
     
     func loadCharacters() {
-        if !isCharacterLastPage {
-            characterService.getCharacterPage(page: characterPageCount) { result in
-                switch result {
-                case .success(let charactersPagination):
-                    self.characters.append(contentsOf: charactersPagination.results)
-                    self.charactersCollectionVCProtocol?.loadCharactersCollection(characters: self.characters, filters: nil)
-                    if charactersPagination.info.next != nil {
-                        self.characterPageCount += 1
-                    } else {
-                        self.isCharacterLastPage = true
-                    }
-                    
-                case .failure(let error):
-                    print(error)
+        characterService.getCharacterPage2(page: characterPageCount)
+            .sink { completion in
+                
+            } receiveValue: { charactersPagination in
+                self.characters.append(contentsOf: charactersPagination.results)
+                self.charactersCollectionVCProtocol?.loadCharactersCollection(characters: self.characters, filters: nil)
+                if charactersPagination.info.next != nil {
+                    self.characterPageCount += 1
+                } else {
+                    self.isCharacterLastPage = true
                 }
             }
-        }
+            .store(in: &bindings)
     }
+    
     
     func loadFilterCharacters() {
         if !isFilteredCharacterLastPage {

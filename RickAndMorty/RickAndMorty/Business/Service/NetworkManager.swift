@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 public enum ServiceErrors: Error, LocalizedError {
     case networkError(String, Int?), emptyResponse, urlError, paramError, decodingError(String)
@@ -25,8 +26,29 @@ public enum ServiceErrors: Error, LocalizedError {
         }
     }
 }
-
+//<T: Codable>
 public final class NetworkManager {
+    public func httpGet2(url: URL) -> AnyPublisher<Data, ServiceErrors> {
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        let cache = RealmManager()
+        cache.fetchAllObjects()
+        if let dataCache = fetchFromCache(url: url.absoluteString) {
+            return Future<Data, ServiceErrors> { promise in
+                promise(.success(dataCache))
+            }
+            .eraseToAnyPublisher()
+        } else {
+            return URLSession.shared
+                        .dataTaskPublisher(for: url)
+                        .map { $0.data }
+                        .mapError { error in .networkError(error.localizedDescription, error.errorCode)}
+                        .share()
+                        .eraseToAnyPublisher()
+        }
+        
+    }
+    
     public func httpGet(url: URL, completion: @escaping (Result<Data, ServiceErrors>) -> Void) {
         var request = URLRequest(url: url)
         request.httpMethod = "GET"

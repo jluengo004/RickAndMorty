@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Combine
 
 public enum CharacterStatus: String {
     case alive = "alive"
@@ -116,6 +117,17 @@ public class CharacterService {
     
     private let baseURL = "https://rickandmortyapi.com/api/character/"
     private let networkManager = NetworkManager()
+    
+    public func getCharacterPage2(page: Int) -> AnyPublisher<CharacterPagination, ServiceErrors> {
+        guard let url = URL(string: baseURL + "?page=\(page)") else {
+            return Fail<CharacterPagination, ServiceErrors>(error: .urlError).eraseToAnyPublisher()
+        }
+        return networkManager.httpGet2(url: url)
+            .decode(type: CharacterPagination.self, decoder: JSONDecoder())
+            .mapError { error in .decodingError("CharacterPagination") }
+            .share()
+            .eraseToAnyPublisher()
+    }
     
     public func getCharacterPage(page: Int, completion: @escaping (Result<CharacterPagination, ServiceErrors>) -> Void) {
         guard let url = URL(string: baseURL + "?page=\(page)") else {
